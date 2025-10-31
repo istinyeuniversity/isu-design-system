@@ -1,5 +1,5 @@
 {
-  "name": "@istinyeuniversity/isu-design-system",
+  "name": "isu-design-system",
   "version": "1.0.0",
   "description": "Official design system for Istinye University - Tailwind CSS based components and styles",
   "main": "dist/isu.css",
@@ -10,6 +10,8 @@
   "scripts": {
     "build": "npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --minify",
     "dev": "npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -23,7 +25,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/istinyeuniversity/isu-design-system.git"
+    "url": "git+https://github.com/istinyeuniversity/isu-design-system.git"
   },
   "bugs": {
     "url": "https://github.com/istinyeuniversity/isu-design-system/issues"
