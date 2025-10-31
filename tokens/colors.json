@@ -1,0 +1,8 @@
+{
+  "color": {
+    "primary": { "value": "#007fff" },
+    "primary-dark": { "value": "#003eff" },
+    "neutral": { "value": "#ededed" },
+    "neutral-dark": { "value": "#1a1a1a" }
+  }
+}

@@ -49,6 +49,9 @@ module.exports = {
 # Install dependencies
 npm install
 
+# Build design tokens from JSON
+npm run tokens
+
 # Development mode with CSS watch
 npm run dev
 
@@ -64,9 +67,17 @@ npm run build-storybook
 
 ## 🎯 Design Tokens
 
+Design tokens are managed via [Style Dictionary](https://styledictionary.com/) and stored in `tokens/` directory.
+
+### Token Sources
+- `tokens/colors.json` - Color palette definitions
+- Auto-generated CSS variables in `src/styles/tokens.css`
+
 ### Colors
-- **Primary**: `#007fff` (Light mode), `#003eff` (Dark mode)
-- **Neutral**: `#ededed` (Light mode), `#1a1a1a` (Dark mode)
+- **Primary**: `var(--color-primary)` → `#007fff`
+- **Primary Dark**: `var(--color-primary-dark)` → `#003eff`
+- **Neutral**: `var(--color-neutral)` → `#ededed`
+- **Neutral Dark**: `var(--color-neutral-dark)` → `#1a1a1a`
 
 ### Typography
 - **Heading**: Space Grotesk
@@ -74,6 +85,16 @@ npm run build-storybook
 
 ### Dark Mode
 The design system supports dark mode via `[data-theme="dark"]` attribute.
+
+### Token Pipeline
+```bash
+# Edit tokens/colors.json
+# Run token build
+npm run tokens
+
+# Tokens are automatically included in build
+npm run build
+```
 
 ## 📚 Storybook Documentation
 

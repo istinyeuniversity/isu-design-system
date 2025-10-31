@@ -1,6 +1,7 @@
 {
   "name": "isu-design-system",
   "version": "1.0.0",
+  "type": "module",
   "description": "Official design system for Istinye University - Tailwind CSS based components and styles",
   "main": "dist/isu.css",
   "files": [
@@ -8,8 +9,9 @@
     "src/"
   ],
   "scripts": {
-    "build": "npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --minify",
-    "dev": "npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --watch",
+    "build": "npm run tokens && npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --minify",
+    "dev": "npm run tokens && npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --watch",
+    "tokens": "node build-tokens.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepublishOnly": "npm run build"
@@ -32,8 +34,12 @@
   },
   "homepage": "https://github.com/istinyeuniversity/isu-design-system#readme",
   "devDependencies": {
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/html-vite": "^10.0.2",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
+    "storybook": "^10.0.2",
+    "style-dictionary": "^5.1.1",
     "tailwindcss": "^3.4.0"
   }
 }
