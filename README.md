@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-3.x-38BDF8?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
-Official design system for Istinye University. A Tailwind CSS-based component library and style guide with Storybook documentation.
+Official design system for Istinye University. A Tailwind CSS-based component library and style guide with comprehensive documentation.
 
 ## 🚀 Installation
 
@@ -108,11 +108,11 @@ npm run dev
 # Build CSS for production
 npm run build
 
-# Run Storybook development server
-npm run storybook
+# Run documentation development server
+npm run docs:dev
 
-# Build Storybook for deployment
-npm run build-storybook
+# Build documentation for deployment
+npm run docs:build
 ```
 
 ## 🎯 Design Tokens
