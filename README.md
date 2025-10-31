@@ -127,8 +127,30 @@ This project uses GitHub Actions for automated NPM publishing:
 2. Run "Publish to NPM" workflow
 3. Select version type (patch/minor/major)
 
+### Semantic Versioning
+This project uses [standard-version](https://github.com/conventional-changelog/standard-version) for automated semantic versioning:
+
+```bash
+# Create a new release (automatically determines version bump)
+npm run release
+
+# Push to GitHub with tags
+git push --follow-tags origin main
+```
+
 ### NPM Token Setup
 Add `NPM_TOKEN` secret in repository settings for automated publishing.
+
+### Release Types
+- **patch** (`1.0.0` → `1.0.1`): Bug fixes
+- **minor** (`1.0.0` → `1.1.0`): New features
+- **major** (`1.0.0` → `2.0.0`): Breaking changes
+
+### Commit Convention
+Use conventional commits for automatic changelog generation:
+- `feat:` - New features (minor version bump)
+- `fix:` - Bug fixes (patch version bump)
+- `BREAKING CHANGE:` - Breaking changes (major version bump)
 
 ## 📁 Project Structure
 
