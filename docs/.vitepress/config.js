@@ -27,6 +27,7 @@ export default defineConfig({
           text: 'Components',
           items: [
             { text: 'Overview', link: '/components/' },
+            { text: 'Button', link: '/components/button' },
             { text: 'Layout', link: '/components/layout' },
             { text: 'Typography', link: '/components/typography' },
             { text: 'Forms', link: '/components/forms' },
