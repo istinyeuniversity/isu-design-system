@@ -41,9 +41,57 @@ module.exports = {
 
 ## 🎨 Available Components
 
-- `.isu-button` - Base button styles
-- `.isu-button-primary` - Primary button with university colors
-- `.isu-logo` - Properly sized logo component
+### Layout Components
+- `.isu-container` - Responsive container with max-width
+- `.isu-grid`, `.isu-grid-2`, `.isu-grid-3`, `.isu-grid-4` - Responsive grid systems
+- `.isu-flex`, `.isu-flex-between`, `.isu-flex-center` - Flexbox utilities
+- `.isu-card`, `.isu-card-hover` - Card components with optional hover effects
+- `.isu-section`, `.isu-section-sm`, `.isu-section-lg` - Section spacing utilities
+
+### Typography Components
+- `.isu-heading-1` through `.isu-heading-6` - Hierarchical heading styles
+- `.isu-body`, `.isu-body-sm`, `.isu-body-lg` - Body text variants
+- `.isu-lead` - Lead paragraph styling
+- `.isu-caption`, `.isu-caption-sm` - Caption text styles
+- `.isu-link`, `.isu-link-subtle` - Link styling variants
+- `.isu-quote`, `.isu-quote-author` - Blockquote components
+
+### Form Components
+- `.isu-input` - Styled input fields with focus states
+- `.isu-textarea` - Multi-line text input
+- `.isu-select` - Styled dropdown select
+- `.isu-checkbox`, `.isu-radio` - Form control inputs
+- `.isu-btn-primary`, `.isu-btn-secondary`, `.isu-btn-ghost`, `.isu-btn-outline` - Button variants
+- `.isu-form-group`, `.isu-form-label`, `.isu-form-help`, `.isu-form-error` - Form layout utilities
+
+### Navigation Components
+- `.isu-nav`, `.isu-nav-container` - Navigation bar structure
+- `.isu-nav-link`, `.isu-nav-mobile-link` - Navigation links
+- `.isu-breadcrumb`, `.isu-breadcrumb-link` - Breadcrumb navigation
+- `.isu-pagination` - Pagination controls
+
+### Feedback Components
+- `.isu-alert-success/error/warning/info` - Alert message variants
+- `.isu-badge-primary/secondary/success/warning/error` - Status badges
+- `.isu-spinner-sm/md/lg` - Loading spinner sizes
+- `.isu-progress`, `.isu-progress-bar` - Progress indicators
+- `.isu-toast-success/error/warning` - Toast notification variants
+
+### Button System
+- `.isu-button` - Base button component
+- Size variants: `.isu-button-sm/md/lg/xl`
+- Color variants: `.isu-button-primary/secondary/ghost/outline/success/warning/error`
+- `.isu-button-group` - Button grouping utility
+- `.isu-button-loading` - Loading state for buttons
+- `.isu-fab` - Floating action button
+
+### Utility Classes
+- `.isu-sr-only` - Screen reader only content
+- `.isu-focus-ring` - Accessible focus indicators
+- `.isu-scroll` - Custom scrollbar styling
+- `.isu-text-truncate`, `.isu-text-multiline` - Text truncation utilities
+- `.isu-aspect-*` - Aspect ratio utilities
+- Animation utilities: `.isu-animate-fade-in`, `.isu-animate-slide-up`, etc.
 
 ## 🛠️ Development
 
