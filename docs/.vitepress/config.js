@@ -3,16 +3,16 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'ISU Design System',
   description: 'Tailwind-based design system for Istinye University',
-  base: '/isu-design-system/',
+  base: process.env.NODE_ENV === 'production' ? '/isu-design-system/' : '/',
 
   head: [
-    ['link', { rel: 'icon', href: '/isu-design-system/favicon.ico' }],
-    ['link', { rel: 'stylesheet', href: '/isu-design-system/dist/isu.css' }],
+    ['link', { rel: 'icon', href: process.env.NODE_ENV === 'production' ? '/isu-design-system/favicon.ico' : '/favicon.ico' }],
+    ['link', { rel: 'stylesheet', href: process.env.NODE_ENV === 'production' ? '/isu-design-system/isu.css' : '/isu.css' }],
     ['meta', { name: 'theme-color', content: '#007fff' }]
   ],
 
   themeConfig: {
-    logo: '/assets/logos/en/logo-blue.svg',
+    logo: process.env.NODE_ENV === 'production' ? '/isu-design-system/assets/logos/en/logo-blue.svg' : '/assets/logos/en/logo-blue.svg',
 
     nav: [
       { text: 'Home', link: '/' },
