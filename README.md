@@ -1,7 +1,9 @@
 # ISU Design System
 
-[![npm version](https://badge.fury.io/js/isu-design-system.svg)](https://badge.fury.io/js/isu-design-system)
+[![Build](https://github.com/istinye-university/isu-design-system/actions/workflows/build.yml/badge.svg)](https://github.com/istinye-university/isu-design-system/actions)
+[![npm version](https://img.shields.io/npm/v/isu-design-system.svg)](https://www.npmjs.com/package/isu-design-system)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-3.x-38BDF8?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
 Official design system for Istinye University. A Tailwind CSS-based component library and style guide with Storybook documentation.
 
