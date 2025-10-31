@@ -2,6 +2,12 @@
 
 Buttons are used to trigger actions, submit forms, or navigate users through your application.
 
+## 🎮 Live Demo
+
+<div style="border: 1px solid #e5e7eb; border-radius: 8px; margin: 1rem 0; overflow: hidden;">
+  <iframe src="/demo.html#buttons" width="100%" height="400" frameborder="0" style="border: none;"></iframe>
+</div>
+
 ## Basic Usage
 
 ```html

@@ -31,6 +31,18 @@ npm install isu-design-system
 - [Design Tokens](./tokens)
 - [Contributing](./contributing)
 
+## 🎮 Interactive Demo
+
+Tüm component'leri canlı olarak görmek için **[Demo Sayfası](/demo.html)**'na göz atın!
+
+Demo'da şunları bulacaksınız:
+- 🎨 Tüm layout component'leri (grid, container, card)
+- 📝 Typography scale (heading'ler, body text)
+- 🔘 Button variants ve states
+- 📝 Form elementleri (input, select, checkbox, radio)
+- 🧭 Navigation component'leri (breadcrumb, pagination)
+- ⚠️ Feedback component'leri (alert, badge, loading, progress)
+
 ## 🎨 Features
 
 - **60+ Components**: Layout, typography, forms, navigation, feedback
@@ -38,6 +50,7 @@ npm install isu-design-system
 - **Responsive Design**: Mobile-first approach
 - **Dark Mode Support**: Built-in theme switching
 - **Semantic Versioning**: Automated releases and changelogs
+- **Interactive Demo**: Tüm component'ler canlı olarak görülebilir
 - **Type-Safe**: CSS custom properties for design tokens
 
 ## 🛠️ Development
@@ -54,6 +67,9 @@ npm run build
 
 # Run documentation locally
 npm run docs:dev
+
+# View interactive demo
+# Visit http://localhost:5173/demo.html
 ```
 
 ## 📦 What's Included

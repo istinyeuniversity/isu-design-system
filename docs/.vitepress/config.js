@@ -18,6 +18,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'Components', link: '/components/' },
+      { text: 'Demo', link: '/demo.html' },
       { text: 'Tokens', link: '/tokens' }
     ],
 
