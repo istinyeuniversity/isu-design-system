@@ -1,14 +1,14 @@
-# @istinyeuniversity/isu-design-system
+# ISU Design System
 
-[![npm version](https://badge.fury.io/js/%40istinyeuniversity%2Fisu-design-system.svg)](https://badge.fury.io/js/%40istinyeuniversity%2Fisu-design-system)
+[![npm version](https://badge.fury.io/js/isu-design-system.svg)](https://badge.fury.io/js/isu-design-system)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Official design system for Istinye University. A Tailwind CSS-based component library and style guide.
+Official design system for Istinye University. A Tailwind CSS-based component library and style guide with Storybook documentation.
 
 ## 🚀 Installation
 
 ```bash
-npm install @istinyeuniversity/isu-design-system
+npm install isu-design-system
 ```
 
 ## 📖 Usage
@@ -18,10 +18,11 @@ npm install @istinyeuniversity/isu-design-system
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <link rel="stylesheet" href="path/to/node_modules/@istinyeuniversity/isu-design-system/dist/isu.css" />
+  <link rel="stylesheet" href="path/to/node_modules/isu-design-system/dist/isu.css" />
 </head>
 <body>
-  <button class="isu-button-primary">Example Button</button>
+  <button class="isu-button-primary">Primary Button</button>
+  <button class="isu-button bg-neutral text-gray-800 border border-gray-300">Secondary Button</button>
 </body>
 </html>
 ```
@@ -31,7 +32,7 @@ npm install @istinyeuniversity/isu-design-system
 // tailwind.config.js
 module.exports = {
   presets: [
-    require('@istinyeuniversity/isu-design-system/tailwind.config.js')
+    require('isu-design-system/tailwind.config.js')
   ]
 }
 ```
@@ -48,11 +49,17 @@ module.exports = {
 # Install dependencies
 npm install
 
-# Development mode with watch
+# Development mode with CSS watch
 npm run dev
 
-# Build for production
+# Build CSS for production
 npm run build
+
+# Run Storybook development server
+npm run storybook
+
+# Build Storybook for deployment
+npm run build-storybook
 ```
 
 ## 🎯 Design Tokens
@@ -67,6 +74,54 @@ npm run build
 
 ### Dark Mode
 The design system supports dark mode via `[data-theme="dark"]` attribute.
+
+## 📚 Storybook Documentation
+
+Component documentation is available via Storybook:
+
+```bash
+npm run storybook
+```
+
+Visit `http://localhost:6006` to view:
+- Interactive component examples
+- Design system documentation
+- Component usage guidelines
+- Visual testing interface
+
+## 🤖 Automated Publishing
+
+This project uses GitHub Actions for automated NPM publishing:
+
+### Release Process
+1. Create a new release on GitHub
+2. GitHub Actions automatically:
+   - Builds the CSS
+   - Updates version number
+   - Publishes to NPM
+   - Updates documentation
+
+### Manual Publishing
+1. Go to GitHub Actions tab
+2. Run "Publish to NPM" workflow
+3. Select version type (patch/minor/major)
+
+### NPM Token Setup
+Add `NPM_TOKEN` secret in repository settings for automated publishing.
+
+## 📁 Project Structure
+
+```
+isu-design-system/
+├── src/
+│   ├── css/isu.css          # Main CSS source
+│   ├── components/          # Component stories
+│   └── assets/logos/        # University logos
+├── dist/isu.css            # Built CSS
+├── .storybook/             # Storybook configuration
+├── .github/workflows/      # GitHub Actions
+└── tailwind.config.js      # Tailwind configuration
+```
 
 ## 📝 License
 
