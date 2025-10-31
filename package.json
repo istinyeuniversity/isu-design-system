@@ -1,0 +1,37 @@
+{
+  "name": "@istinyeuniversity/isu-design-system",
+  "version": "1.0.0",
+  "description": "Official design system for Istinye University - Tailwind CSS based components and styles",
+  "main": "dist/isu.css",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "scripts": {
+    "build": "npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --minify",
+    "dev": "npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "design-system",
+    "istinye-university",
+    "tailwindcss",
+    "university",
+    "turkey"
+  ],
+  "author": "Istinye University",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/istinyeuniversity/isu-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/istinyeuniversity/isu-design-system/issues"
+  },
+  "homepage": "https://github.com/istinyeuniversity/isu-design-system#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.0"
+  }
+}

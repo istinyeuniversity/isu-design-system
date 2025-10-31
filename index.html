@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISU Design System v1</title>
+  <link rel="stylesheet" href="./dist/isu.css" />
+</head>
+<body>
+  <header>
+    <img class="logo" alt="ISU Logo" />
+    <div class="controls">
+      <button onclick="toggleLang()">Switch Language</button>
+      <button onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+  </header>
+  <main>
+    <h1>ISU Design System</h1>
+    <p>This system is built with Space Grotesk and Poppins fonts, institutional color palette, and bilingual logo variants.</p>
+  </main>
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.dataset.theme = html.dataset.theme === 'light' ? 'dark' : 'light';
+    }
+    function toggleLang() {
+      const html = document.documentElement;
+      html.dataset.lang = html.dataset.lang === 'en' ? 'tr' : 'en';
+    }
+  </script>
+</body>
+</html>

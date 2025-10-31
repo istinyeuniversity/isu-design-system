@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ISU Design System Components */
+@layer components {
+  .isu-button {
+    @apply px-4 py-2 rounded-lg font-medium transition-colors;
+  }
+
+  .isu-button-primary {
+    @apply isu-button bg-primary text-white hover:bg-primary-dark;
+  }
+
+  .isu-logo {
+    @apply h-12 w-auto;
+  }
+}
+
+/* ISU Design Tokens */
+@layer base {
+  :root {
+    --isu-primary: #007fff;
+    --isu-primary-dark: #003eff;
+    --isu-neutral: #ededed;
+  }
+
+  [data-theme="dark"] {
+    --isu-primary: #003eff;
+    --isu-neutral: #1a1a1a;
+  }
+}
