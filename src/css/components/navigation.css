@@ -1,0 +1,103 @@
+/* ISU Navigation Components */
+@layer components {
+  /* Navigation Bar */
+  .isu-nav {
+    @apply bg-white shadow-sm border-b border-neutral/20 sticky top-0 z-50;
+  }
+
+  .isu-nav-container {
+    @apply isu-container py-4;
+  }
+
+  .isu-nav-brand {
+    @apply flex items-center space-x-2 text-xl font-bold text-gray-900;
+  }
+
+  .isu-nav-menu {
+    @apply hidden md:flex items-center space-x-8;
+  }
+
+  .isu-nav-link {
+    @apply text-gray-600 hover:text-primary px-3 py-2 rounded-md
+           text-sm font-medium transition-colors duration-200
+           relative group;
+  }
+
+  .isu-nav-link.active {
+    @apply text-primary;
+  }
+
+  .isu-nav-link::after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary
+           transition-all duration-200 group-hover:w-full;
+    content: '';
+  }
+
+  .isu-nav-link.active::after {
+    @apply w-full;
+  }
+
+  /* Mobile Menu Button */
+  .isu-nav-mobile-btn {
+    @apply md:hidden p-2 rounded-md text-gray-600 hover:text-primary
+           hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary/20;
+  }
+
+  /* Mobile Menu */
+  .isu-nav-mobile {
+    @apply md:hidden border-t border-neutral/20 bg-white;
+  }
+
+  .isu-nav-mobile-menu {
+    @apply px-4 py-4 space-y-1;
+  }
+
+  .isu-nav-mobile-link {
+    @apply block px-3 py-2 text-base font-medium text-gray-600
+           hover:text-primary hover:bg-primary/5 rounded-md
+           transition-colors duration-200;
+  }
+
+  .isu-nav-mobile-link.active {
+    @apply text-primary bg-primary/5;
+  }
+
+  /* Breadcrumb */
+  .isu-breadcrumb {
+    @apply flex items-center space-x-2 text-sm text-gray-500 mb-4;
+  }
+
+  .isu-breadcrumb-item {
+    @apply flex items-center;
+  }
+
+  .isu-breadcrumb-link {
+    @apply hover:text-primary transition-colors;
+  }
+
+  .isu-breadcrumb-separator {
+    @apply mx-2 text-gray-400;
+  }
+
+  /* Pagination */
+  .isu-pagination {
+    @apply flex items-center justify-center space-x-1 mt-8;
+  }
+
+  .isu-pagination-item {
+    @apply px-3 py-2 text-sm font-medium rounded-md transition-colors;
+  }
+
+  .isu-pagination-link {
+    @apply text-gray-600 hover:text-primary hover:bg-primary/5;
+  }
+
+  .isu-pagination-link.active {
+    @apply text-primary bg-primary/10;
+  }
+
+  .isu-pagination-prev,
+  .isu-pagination-next {
+    @apply px-2 py-2 text-gray-400 hover:text-primary transition-colors;
+  }
+}

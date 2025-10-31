@@ -1,0 +1,63 @@
+/* ISU Layout Components */
+@layer components {
+  /* Container */
+  .isu-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Grid System */
+  .isu-grid {
+    @apply grid gap-4;
+  }
+
+  .isu-grid-2 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .isu-grid-3 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .isu-grid-4 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+  }
+
+  /* Flex Utilities */
+  .isu-flex {
+    @apply flex items-center;
+  }
+
+  .isu-flex-between {
+    @apply flex items-center justify-between;
+  }
+
+  .isu-flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .isu-flex-column {
+    @apply flex flex-col;
+  }
+
+  /* Card Component */
+  .isu-card {
+    @apply bg-white rounded-lg border border-neutral/20 p-6 shadow-sm;
+  }
+
+  .isu-card-hover {
+    @apply isu-card hover:shadow-md transition-shadow cursor-pointer;
+  }
+
+  /* Spacing Utilities */
+  .isu-section {
+    @apply py-12 lg:py-16;
+  }
+
+  .isu-section-sm {
+    @apply py-8 lg:py-12;
+  }
+
+  .isu-section-lg {
+    @apply py-16 lg:py-24;
+  }
+}

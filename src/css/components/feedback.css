@@ -1,0 +1,129 @@
+/* ISU Feedback Components */
+@layer components {
+  /* Alert Components */
+  .isu-alert {
+    @apply p-4 rounded-lg mb-4 border;
+  }
+
+  .isu-alert-success {
+    @apply isu-alert bg-green-50 text-green-800 border-green-200;
+  }
+
+  .isu-alert-error {
+    @apply isu-alert bg-red-50 text-red-800 border-red-200;
+  }
+
+  .isu-alert-warning {
+    @apply isu-alert bg-yellow-50 text-yellow-800 border-yellow-200;
+  }
+
+  .isu-alert-info {
+    @apply isu-alert bg-blue-50 text-blue-800 border-blue-200;
+  }
+
+  .isu-alert-icon {
+    @apply flex items-start space-x-3;
+  }
+
+  .isu-alert-content {
+    @apply flex-1;
+  }
+
+  .isu-alert-title {
+    @apply font-medium mb-1;
+  }
+
+  .isu-alert-description {
+    @apply text-sm opacity-90;
+  }
+
+  /* Badge Components */
+  .isu-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .isu-badge-primary {
+    @apply isu-badge bg-primary/10 text-primary;
+  }
+
+  .isu-badge-secondary {
+    @apply isu-badge bg-gray-100 text-gray-800;
+  }
+
+  .isu-badge-success {
+    @apply isu-badge bg-green-100 text-green-800;
+  }
+
+  .isu-badge-warning {
+    @apply isu-badge bg-yellow-100 text-yellow-800;
+  }
+
+  .isu-badge-error {
+    @apply isu-badge bg-red-100 text-red-800;
+  }
+
+  /* Loading Components */
+  .isu-spinner {
+    @apply animate-spin rounded-full border-2 border-neutral/20 border-t-primary;
+  }
+
+  .isu-spinner-sm {
+    @apply isu-spinner w-4 h-4;
+  }
+
+  .isu-spinner-md {
+    @apply isu-spinner w-6 h-6;
+  }
+
+  .isu-spinner-lg {
+    @apply isu-spinner w-8 h-8;
+  }
+
+  .isu-loading-overlay {
+    @apply fixed inset-0 bg-white/80 flex items-center justify-center z-50;
+  }
+
+  .isu-loading-text {
+    @apply text-gray-600 ml-3;
+  }
+
+  /* Progress Bar */
+  .isu-progress {
+    @apply w-full bg-neutral/20 rounded-full h-2;
+  }
+
+  .isu-progress-bar {
+    @apply bg-primary h-2 rounded-full transition-all duration-300;
+  }
+
+  /* Toast Notifications */
+  .isu-toast {
+    @apply fixed top-4 right-4 z-50 min-w-80 max-w-md;
+  }
+
+  .isu-toast-item {
+    @apply p-4 rounded-lg shadow-lg border mb-3 transform transition-all duration-300;
+  }
+
+  .isu-toast-success {
+    @apply isu-toast-item bg-green-50 text-green-800 border-green-200;
+  }
+
+  .isu-toast-error {
+    @apply isu-toast-item bg-red-50 text-red-800 border-red-200;
+  }
+
+  .isu-toast-warning {
+    @apply isu-toast-item bg-yellow-50 text-yellow-800 border-yellow-200;
+  }
+
+  /* Tooltip */
+  .isu-tooltip {
+    @apply absolute z-50 px-3 py-2 text-sm font-medium text-white bg-gray-900
+           rounded-lg shadow-sm opacity-0 invisible transition-all duration-200;
+  }
+
+  .isu-tooltip.show {
+    @apply opacity-100 visible;
+  }
+}
