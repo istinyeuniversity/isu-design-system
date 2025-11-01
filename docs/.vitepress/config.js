@@ -5,6 +5,29 @@ export default defineConfig({
   description: 'Tailwind-based design system for Istinye University',
   base: process.env.NODE_ENV === 'production' ? '/isu-design-system/' : '/',
 
+  vite: {
+    publicDir: '../docs',
+    server: {
+      fs: {
+        allow: ['..']
+      }
+    },
+    resolve: {
+      alias: {
+        '@': '.'
+      }
+    }
+  },
+
+  // Auto-import Vue components
+  vue: {
+    template: {
+      compilerOptions: {
+        // Auto-import components from .vitepress/components
+      }
+    }
+  },
+
   head: [
     ['link', { rel: 'icon', href: process.env.NODE_ENV === 'production' ? '/isu-design-system/favicon.ico' : '/favicon.ico' }],
     ['link', { rel: 'stylesheet', href: process.env.NODE_ENV === 'production' ? '/isu-design-system/isu.css' : '/isu.css' }],
@@ -18,7 +41,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'Components', link: '/components/' },
-      { text: 'Demo', link: '/demo.html' },
+      { text: 'Demo', link: '/demo' },
       { text: 'Tokens', link: '/tokens' }
     ],
 
