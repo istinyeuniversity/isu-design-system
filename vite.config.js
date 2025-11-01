@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  // Storybook için gerekli konfigürasyon
+  // Required configuration for Storybook
   optimizeDeps: {
     include: ['@storybook/html-vite']
   }

@@ -112,7 +112,7 @@ npm run build
 npm run docs:dev
 
 # View interactive component demo
-# Visit http://localhost:5173/demo.html
+# Visit http://localhost:5173/demo
 
 # Build documentation for deployment
 npm run docs:build
