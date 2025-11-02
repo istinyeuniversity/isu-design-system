@@ -29,13 +29,135 @@ npm install isu-design-system
 </html>
 ```
 
-### With Tailwind CSS
+### With Tailwind CSS Preset
 ```javascript
 // tailwind.config.js
 module.exports = {
   presets: [
-    require('isu-design-system/tailwind.config.js')
+    require('isu-design-system/tailwind-preset.js')
+  ],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./public/index.html"
   ]
+}
+```
+
+### With Tailwind CSS (Custom)
+```javascript
+// tailwind.config.js
+const isuPreset = require('isu-design-system/tailwind-preset.js');
+
+module.exports = {
+  presets: [isuPreset],
+  // Add your customizations
+  theme: {
+    extend: {
+      colors: {
+        brand: isuPreset.theme.extend.colors.primary
+      }
+    }
+  }
+}
+```
+
+### In JavaScript/TypeScript Applications
+
+#### CSS Import
+```javascript
+// Import CSS in your main application file
+import 'isu-design-system/dist/isu.css';
+
+// For Vite applications
+import isuCSS from 'isu-design-system/dist/isu.css?inline';
+// or
+import 'isu-design-system/dist/isu.css';
+```
+
+#### Component Usage
+```javascript
+// Import individual components
+import { createButton, createCard, createInput } from 'isu-design-system/src/components/Button.js';
+import { createAlert, createBadge } from 'isu-design-system/src/components/Feedback.js';
+
+// Use components
+const button = createButton({
+  label: 'Click me',
+  variant: 'primary',
+  size: 'md'
+});
+
+const alert = createAlert({
+  type: 'success',
+  title: 'Success!',
+  description: 'Operation completed successfully.'
+});
+```
+
+#### React/Vue Integration
+```jsx
+// React Example
+import React from 'react';
+import 'isu-design-system/dist/isu.css';
+
+function App() {
+  return (
+    <div data-theme="light">
+      <button className="isu-button isu-button-primary">
+        Primary Button
+      </button>
+      <div className="isu-card">
+        <h3 className="isu-heading-3">Card Title</h3>
+        <p className="isu-body">Card content here.</p>
+      </div>
+    </div>
+  );
+}
+```
+
+```vue
+<!-- Vue Example -->
+<template>
+  <div :data-theme="theme">
+    <button class="isu-button isu-button-primary">
+      Primary Button
+    </button>
+    <div class="isu-card">
+      <h3 class="isu-heading-3">Card Title</h3>
+      <p class="isu-body">Card content here.</p>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import 'isu-design-system/dist/isu.css';
+import { ref } from 'vue';
+
+const theme = ref('light');
+</script>
+```
+
+#### Theme Switching
+```javascript
+// JavaScript
+function toggleTheme() {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+}
+
+// React Hook
+function useTheme() {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
+
+  return { theme, toggleTheme };
 }
 ```
 
@@ -108,14 +230,11 @@ npm run dev
 # Build CSS for production
 npm run build
 
-# Run documentation development server
-npm run docs:dev
+# Run Storybook development server
+npm run storybook
 
-# View interactive component demo
-# Visit http://localhost:5173/demo
-
-# Build documentation for deployment
-npm run docs:build
+# Build Storybook for deployment
+npm run build-storybook
 ```
 
 ## 🎯 Design Tokens
@@ -137,7 +256,36 @@ Design tokens are managed via [Style Dictionary](https://styledictionary.com/) a
 - **Body**: Poppins
 
 ### Dark Mode
-The design system supports dark mode via `[data-theme="dark"]` attribute.
+The design system supports comprehensive dark mode with automatic theme switching:
+
+#### Setup
+```html
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <link rel="stylesheet" href="path/to/isu-design-system/dist/isu.css" />
+</head>
+<body>
+  <!-- Content -->
+</body>
+</html>
+```
+
+#### Theme Switching
+```javascript
+// Switch to dark mode
+document.documentElement.setAttribute('data-theme', 'dark');
+
+// Switch to light mode
+document.documentElement.setAttribute('data-theme', 'light');
+```
+
+#### CSS Classes
+All components automatically adapt to the current theme:
+- Background colors automatically switch
+- Text colors adjust for contrast
+- Borders and shadows update accordingly
+- Semantic colors (success, error, warning) work in both themes
 
 ### Token Pipeline
 ```bash
@@ -151,17 +299,26 @@ npm run build
 
 ## 📚 Storybook Documentation
 
-Component documentation is available via Storybook:
+Comprehensive component documentation is available via Storybook:
 
 ```bash
 npm run storybook
 ```
 
 Visit `http://localhost:6006` to view:
-- Interactive component examples
-- Design system documentation
-- Component usage guidelines
-- Visual testing interface
+- **Interactive Components**: All UI components with live controls
+- **Design System Guide**: Typography, colors, spacing, and usage guidelines
+- **Component Stories**: Real-world usage examples for each component
+- **Responsive Testing**: View components at different screen sizes
+- **Dark Mode Preview**: Test components in both light and dark themes
+
+### Available Stories
+- **Button**: Primary, secondary, ghost, outline, success, warning, error variants
+- **Forms**: Input, textarea, select, checkbox, radio, form groups
+- **Layout**: Cards, grids, containers, flex utilities
+- **Feedback**: Alerts, badges, spinners, progress bars, toasts
+- **Navigation**: Breadcrumbs, pagination, tabs
+- **Typography**: Headings, body text, links, quotes
 
 ## 🤖 Automated Publishing
 
@@ -210,13 +367,29 @@ Use conventional commits for automatic changelog generation:
 ```
 isu-design-system/
 ├── src/
-│   ├── css/isu.css          # Main CSS source
-│   ├── components/          # Component stories
-│   └── assets/logos/        # University logos
-├── dist/isu.css            # Built CSS
-├── .storybook/             # Storybook configuration
-├── .github/workflows/      # GitHub Actions
-└── tailwind.config.js      # Tailwind configuration
+│   ├── css/
+│   │   ├── isu.css              # Main CSS source with dark theme
+│   │   └── utilities.css        # Additional utility classes
+│   ├── components/              # Component JavaScript and Stories
+│   │   ├── Button.js            # Button component and stories
+│   │   ├── Card.js              # Layout components and stories
+│   │   ├── Input.js             # Form components and stories
+│   │   ├── Feedback.js          # Alert, badge, spinner components
+│   │   ├── Navigation.js        # Breadcrumb, pagination components
+│   │   ├── Typography.js        # Text components and stories
+│   │   └── Logo.js              # Logo component
+│   ├── styles/
+│   │   └── tokens.css           # Auto-generated design tokens
+│   └── assets/logos/            # University logos (EN/TR variants)
+├── dist/isu.css                # Built CSS for distribution
+├── tailwind-preset.js          # Tailwind CSS preset
+├── tokens/colors.json          # Color token definitions
+├── build-tokens.js             # Style Dictionary build script
+├── .storybook/                 # Storybook configuration
+├── .github/workflows/          # GitHub Actions CI/CD
+├── tailwind.config.js          # Tailwind configuration
+├── index.html                  # Demo and testing page
+└── package.json                # Project configuration
 ```
 
 ## 📝 License

@@ -4,9 +4,16 @@
   "type": "module",
   "description": "Official design system for Istinye University - Tailwind CSS based components and styles",
   "main": "dist/isu.css",
+  "tailwind": "./tailwind-preset.js",
+  "exports": {
+    ".": "./dist/isu.css",
+    "./tailwind-preset.js": "./tailwind-preset.js",
+    "./src/css/isu.css": "./src/css/isu.css",
+    "./src/components/*": "./src/components/*"
+  },
   "files": [
     "dist/",
-    "src/"
+    "tailwind-preset.js"
   ],
   "scripts": {
     "build": "npm run tokens && npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --minify",
@@ -26,6 +33,9 @@
   ],
   "author": "Istinye University",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/istinyeuniversity/isu-design-system.git"
