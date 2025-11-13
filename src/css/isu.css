@@ -733,14 +733,17 @@
   }
 
   @media (max-width: 640px) {
+    .step-indicator,
     .isu-step-indicator {
       @apply flex-col items-start;
     }
 
+    .step,
     .isu-step {
       @apply flex-row items-center w-full mb-4;
     }
 
+    .step:not(:last-child)::after,
     .isu-step:not(:last-child)::after {
       top: 50%;
       left: 1rem;
@@ -748,6 +751,7 @@
       height: 100%;
     }
 
+    .step-label,
     .isu-step-label {
       @apply ml-3 mt-0 text-left;
       max-width: none;
@@ -930,6 +934,365 @@
     @apply mb-2;
     color: var(--isu-primary);
   }
+
+  /* ------ Form Step Component ------ */
+  .isu-form-step {
+    @apply mb-6 p-4 rounded-lg border-2;
+    background-color: var(--bg-secondary);
+    border-color: var(--border-primary);
+    transition: all 0.3s ease;
+  }
+
+  .isu-form-step.active {
+    border-color: var(--isu-primary);
+    box-shadow: 0 0 0 3px rgba(0, 127, 255, 0.1);
+  }
+
+  .isu-form-step.completed {
+    border-color: var(--success);
+    background-color: var(--success-bg);
+  }
+
+  /* ------ Language Button Component ------ */
+  .isu-lang-btn {
+    @apply inline-flex items-center gap-2 px-3 py-2 rounded-lg border transition-all duration-200;
+    background-color: var(--bg-secondary);
+    border-color: var(--border-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+  }
+
+  .isu-lang-btn:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--isu-primary);
+  }
+
+  .isu-lang-btn.active {
+    background-color: var(--isu-primary);
+    border-color: var(--isu-primary);
+    color: white;
+  }
+
+  /* ------ Prefix-less aliases for compatibility ------ */
+  .timeline,
+  .isu-timeline {
+    @apply relative pl-8;
+    position: relative;
+  }
+
+  .timeline::before,
+  .isu-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--border-primary);
+  }
+
+  .timeline-item,
+  .isu-timeline-item {
+    @apply relative mb-8 last:mb-0;
+    position: relative;
+  }
+
+  .timeline-marker,
+  .isu-timeline-marker {
+    @apply absolute w-4 h-4 rounded-full border-2;
+    left: -1.75rem;
+    top: 0.25rem;
+    background-color: var(--bg-primary);
+    border-color: var(--border-secondary);
+    transition: all 0.3s ease;
+  }
+
+  .timeline-item.completed .timeline-marker,
+  .isu-timeline-item.completed .isu-timeline-marker {
+    background-color: var(--success);
+    border-color: var(--success);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+  }
+
+  .timeline-item.active .timeline-marker,
+  .isu-timeline-item.active .isu-timeline-marker {
+    background-color: var(--isu-primary);
+    border-color: var(--isu-primary);
+    box-shadow: 0 0 0 4px rgba(0, 127, 255, 0.2), 0 0 12px rgba(0, 127, 255, 0.4);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .timeline-item.pending .timeline-marker,
+  .isu-timeline-item.pending .isu-timeline-marker {
+    background-color: var(--bg-primary);
+    border-color: var(--border-secondary);
+  }
+
+  .timeline-content,
+  .isu-timeline-content {
+    @apply pb-4;
+  }
+
+  .timeline-title,
+  .isu-timeline-title {
+    @apply font-semibold text-base mb-1;
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+  }
+
+  .timeline-date,
+  .isu-timeline-date {
+    @apply text-sm mb-2;
+    font-family: var(--font-body);
+    color: var(--text-tertiary);
+  }
+
+  .timeline-person,
+  .isu-timeline-person {
+    @apply text-sm mb-2;
+    font-family: var(--font-body);
+    color: var(--text-secondary);
+  }
+
+  .timeline-note,
+  .isu-timeline-note {
+    @apply text-sm mt-2;
+    font-family: var(--font-body);
+    color: var(--text-tertiary);
+  }
+
+  .step-indicator,
+  .isu-step-indicator {
+    @apply flex items-center justify-between w-full relative;
+    position: relative;
+  }
+
+  .step,
+  .isu-step {
+    @apply flex flex-col items-center relative flex-1;
+    position: relative;
+  }
+
+  .step:not(:last-child)::after,
+  .isu-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: var(--border-primary);
+    z-index: 0;
+  }
+
+  .step.completed:not(:last-child)::after,
+  .isu-step.completed:not(:last-child)::after {
+    background-color: var(--success);
+  }
+
+  .step.active:not(:last-child)::after,
+  .isu-step.active:not(:last-child)::after {
+    background: linear-gradient(to right, var(--success) 0%, var(--border-primary) 100%);
+  }
+
+  .step-circle,
+  .isu-step-circle {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold relative z-10;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-secondary);
+    color: var(--text-tertiary);
+    font-family: var(--font-body);
+    transition: all 0.3s ease;
+  }
+
+  .step.completed .step-circle,
+  .isu-step.completed .isu-step-circle {
+    background-color: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .step.active .step-circle,
+  .isu-step.active .isu-step-circle {
+    background-color: var(--isu-primary);
+    border-color: var(--isu-primary);
+    color: white;
+    box-shadow: 0 0 0 4px rgba(0, 127, 255, 0.2), 0 0 12px rgba(0, 127, 255, 0.4);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .step.pending .step-circle,
+  .isu-step.pending .isu-step-circle {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-secondary);
+    color: var(--text-tertiary);
+  }
+
+  .step-label,
+  .isu-step-label {
+    @apply mt-2 text-xs text-center;
+    font-family: var(--font-body);
+    color: var(--text-secondary);
+    max-width: 100px;
+  }
+
+  .step.completed .step-label,
+  .step.active .step-label,
+  .isu-step.completed .isu-step-label,
+  .isu-step.active .isu-step-label {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .file-upload-area,
+  .isu-file-upload-area {
+    @apply border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-200;
+    background-color: var(--bg-secondary);
+    border-color: var(--border-primary);
+    color: var(--text-secondary);
+  }
+
+  .file-upload-area:hover,
+  .isu-file-upload-area:hover {
+    border-color: var(--isu-primary);
+    background-color: var(--bg-tertiary);
+  }
+
+  .requirement-check,
+  .isu-requirement-check {
+    @apply flex items-center gap-3 p-3 rounded-lg border transition-all duration-200;
+    font-family: var(--font-body);
+    background-color: var(--bg-secondary);
+    border-color: var(--border-primary);
+  }
+
+  .requirement-check.met,
+  .isu-requirement-check.met {
+    background-color: var(--success-bg);
+    border-color: var(--success-border);
+    color: var(--success);
+  }
+
+  .requirement-check.not-met,
+  .isu-requirement-check.not-met {
+    background-color: var(--error-bg);
+    border-color: var(--error-border);
+    color: var(--error);
+  }
+
+  .check-icon,
+  .isu-requirement-icon {
+    @apply text-xl font-bold flex-shrink-0;
+  }
+
+  .requirement-check.met .check-icon::before,
+  .isu-requirement-check.met .isu-requirement-icon::before {
+    content: '✓';
+  }
+
+  .requirement-check.not-met .check-icon::before,
+  .isu-requirement-check.not-met .isu-requirement-icon::before {
+    content: '✗';
+  }
+
+  .requirement-check .requirement-text,
+  .isu-requirement-check .isu-requirement-text {
+    @apply flex-1 text-sm;
+    color: inherit;
+  }
+
+  .score-display,
+  .isu-score-display {
+    @apply rounded-lg p-6 text-center relative overflow-hidden;
+    background: linear-gradient(135deg, var(--isu-primary) 0%, var(--isu-primary-dark) 100%);
+    color: white;
+    font-family: var(--font-body);
+  }
+
+  .score-value,
+  .isu-score-value {
+    @apply text-5xl font-bold mb-2;
+    font-family: var(--font-heading);
+    line-height: 1;
+  }
+
+  .score-label,
+  .isu-score-label {
+    @apply text-base font-medium mb-1;
+    opacity: 0.9;
+  }
+
+  .form-step,
+  .isu-form-step {
+    @apply mb-6 p-4 rounded-lg border-2;
+    background-color: var(--bg-secondary);
+    border-color: var(--border-primary);
+    transition: all 0.3s ease;
+  }
+
+  .form-step.active,
+  .isu-form-step.active {
+    border-color: var(--isu-primary);
+    box-shadow: 0 0 0 3px rgba(0, 127, 255, 0.1);
+  }
+
+  .form-step.completed,
+  .isu-form-step.completed {
+    border-color: var(--success);
+    background-color: var(--success-bg);
+  }
+
+  .lang-btn,
+  .isu-lang-btn {
+    @apply inline-flex items-center gap-2 px-3 py-2 rounded-lg border transition-all duration-200;
+    background-color: var(--bg-secondary);
+    border-color: var(--border-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+  }
+
+  .lang-btn:hover,
+  .isu-lang-btn:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--isu-primary);
+  }
+
+  .lang-btn.active,
+  .isu-lang-btn.active {
+    background-color: var(--isu-primary);
+    border-color: var(--isu-primary);
+    color: white;
+  }
+
+  .stat-card,
+  .isu-card.stat-card {
+    @apply rounded-lg border-2 p-6 shadow-sm text-center;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-primary);
+  }
+
+  .stat-card .isu-heading-3,
+  .isu-card.stat-card .isu-heading-3 {
+    @apply mb-2;
+    color: var(--isu-primary);
+  }
+
+  .hover-lift,
+  .isu-card.hover-lift {
+    @apply rounded-lg border-2 p-6 shadow-sm transition-all duration-300 cursor-pointer;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-primary);
+  }
+
+  .hover-lift:hover,
+  .isu-card.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 /* ============================================
@@ -1094,6 +1457,105 @@
   }
 
   /* Card variants dark theme */
+  [data-theme="dark"] .isu-card.hover-lift:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Form Step dark theme */
+  [data-theme="dark"] .form-step,
+  [data-theme="dark"] .isu-form-step {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-primary);
+  }
+
+  [data-theme="dark"] .form-step.active,
+  [data-theme="dark"] .isu-form-step.active {
+    border-color: var(--isu-primary);
+  }
+
+  [data-theme="dark"] .form-step.completed,
+  [data-theme="dark"] .isu-form-step.completed {
+    background-color: var(--success-bg);
+    border-color: var(--success-border);
+  }
+
+  /* Language Button dark theme */
+  [data-theme="dark"] .lang-btn,
+  [data-theme="dark"] .isu-lang-btn {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-primary);
+  }
+
+  [data-theme="dark"] .lang-btn:hover,
+  [data-theme="dark"] .isu-lang-btn:hover {
+    background-color: var(--bg-hover);
+  }
+
+  /* Timeline dark theme for prefix-less classes */
+  [data-theme="dark"] .timeline::before,
+  [data-theme="dark"] .isu-timeline::before {
+    background-color: var(--border-primary);
+  }
+
+  [data-theme="dark"] .timeline-item.pending .timeline-marker,
+  [data-theme="dark"] .isu-timeline-item.pending .isu-timeline-marker {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-secondary);
+  }
+
+  /* Step Indicator dark theme for prefix-less classes */
+  [data-theme="dark"] .step-circle,
+  [data-theme="dark"] .isu-step-circle {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-primary);
+  }
+
+  [data-theme="dark"] .step.pending .step-circle,
+  [data-theme="dark"] .isu-step.pending .isu-step-circle {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-primary);
+  }
+
+  /* File Upload dark theme for prefix-less classes */
+  [data-theme="dark"] .file-upload-area,
+  [data-theme="dark"] .isu-file-upload-area {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-primary);
+  }
+
+  [data-theme="dark"] .file-upload-area:hover,
+  [data-theme="dark"] .isu-file-upload-area:hover {
+    background-color: var(--bg-hover);
+  }
+
+  /* Requirement Check dark theme for prefix-less classes */
+  [data-theme="dark"] .requirement-check,
+  [data-theme="dark"] .isu-requirement-check {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-primary);
+  }
+
+  /* Score Display dark theme for prefix-less classes */
+  [data-theme="dark"] .score-display,
+  [data-theme="dark"] .isu-score-display {
+    background: linear-gradient(135deg, var(--isu-primary) 0%, var(--isu-primary-dark) 100%);
+  }
+
+  /* Stat Card dark theme for prefix-less classes */
+  [data-theme="dark"] .stat-card,
+  [data-theme="dark"] .isu-card.stat-card {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-primary);
+  }
+
+  /* Hover Lift dark theme for prefix-less classes */
+  [data-theme="dark"] .hover-lift,
+  [data-theme="dark"] .isu-card.hover-lift {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-primary);
+  }
+
+  [data-theme="dark"] .hover-lift:hover,
   [data-theme="dark"] .isu-card.hover-lift:hover {
     box-shadow: var(--shadow-lg);
   }
