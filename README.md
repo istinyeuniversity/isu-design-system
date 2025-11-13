@@ -170,7 +170,15 @@ function useTheme() {
 - `.isu-card`, `.isu-card-hover` - Card components with optional hover effects
 - `.isu-card.hover-lift` - Card with lift animation on hover
 - `.isu-card.stat-card` - Statistic card variant for displaying metrics
+- `.isu-card-header` - Card header section
+- `.isu-stat-icon`, `.isu-stat-content`, `.isu-stat-label`, `.isu-stat-value` - Stat card internal components
+- `.isu-view-container` - View container with fade-in animation
+- `.isu-view-container-active` - Active state for view container
+- `.isu-app-wrapper` - App wrapper for sticky footer layout
 - `.isu-section`, `.isu-section-sm`, `.isu-section-lg` - Section spacing utilities
+- `.isu-footer` - Footer component with responsive grid layout
+  - `.isu-footer-content`, `.isu-footer-brand`, `.isu-footer-logo`, `.isu-footer-university`
+  - `.isu-footer-contact`, `.isu-footer-links`, `.isu-footer-bottom`
 
 ### Typography Components
 - `.isu-heading-1` through `.isu-heading-6` - Hierarchical heading styles
@@ -190,16 +198,19 @@ function useTheme() {
 
 ### Navigation Components
 - `.isu-nav`, `.isu-nav-container` - Navigation bar structure
-- `.isu-nav-link`, `.isu-nav-mobile-link` - Navigation links
+- `.isu-nav-link` - Navigation link with active state and hover effects
+- `.isu-nav-mobile-link` - Navigation links
 - `.isu-breadcrumb`, `.isu-breadcrumb-link` - Breadcrumb navigation
 - `.isu-pagination` - Pagination controls
 
 ### Feedback Components
 - `.isu-alert-success/error/warning/info` - Alert message variants
 - `.isu-badge-primary/secondary/success/warning/error` - Status badges
+- `.isu-status-badge` - Status badge with variants (in-progress, pending, hr, completed, rejected)
 - `.isu-spinner-sm/md/lg` - Loading spinner sizes
 - `.isu-progress`, `.isu-progress-bar` - Progress indicators
-- `.isu-toast-success/error/warning` - Toast notification variants
+- `.isu-toast` - Toast notification component with success/error/info/warning variants
+- `.isu-toast-hidden` - Hidden state for toast notifications
 
 ### Process Components
 - `.isu-timeline` - Timeline component for process tracking
@@ -210,6 +221,7 @@ function useTheme() {
   - `.isu-step.completed/active/pending` - Step states
   - `.isu-step-circle` - Step number circle
   - `.isu-step-label` - Step label text
+- `.isu-form-step` - Form step component with active/completed states
 
 ### Data Display Components
 - `.isu-table` - Styled data table with hover effects
@@ -233,6 +245,19 @@ function useTheme() {
   - `.isu-file-upload-text` - Upload text
   - `.isu-file-upload-hint` - Helper text
 
+### Organization Tree Component
+- `.isu-tree-item` - Tree item container
+- `.isu-tree-toggle` - Expand/collapse toggle button
+- `.isu-tree-toggle-expanded` - Expanded state
+- `.isu-tree-label` - Tree label
+- `.isu-tree-children` - Children container
+- `.isu-tree-children-show` - Show children state
+- `.isu-tree-child` - Child item link
+
+### Additional Components
+- `.isu-icon-placeholder` - Icon placeholder component
+- `.isu-lang-btn` - Language selector button with active state
+
 ### Button System
 - `.isu-button` - Base button component
 - Size variants: `.isu-button-sm/md/lg/xl` (small variant now available)
@@ -243,11 +268,14 @@ function useTheme() {
 
 ### Utility Classes
 - `.isu-sr-only` - Screen reader only content
-- `.isu-focus-ring` - Accessible focus indicators
+- `.isu-focus-ring` - Accessible focus indicators (WCAG2 AA compliant)
+- `.isu-skip-link` - Skip to main content link (WCAG2 AA)
+- `.isu-focus-visible` - Visible focus indicators for all interactive elements
 - `.isu-scroll` - Custom scrollbar styling
 - `.isu-text-truncate`, `.isu-text-multiline` - Text truncation utilities
 - `.isu-aspect-*` - Aspect ratio utilities
 - Animation utilities: `.isu-animate-fade-in`, `.isu-animate-slide-up`, etc.
+- Reduced motion support via `prefers-reduced-motion` media query (WCAG2 AA)
 
 ## 🛠️ Development
 
@@ -288,6 +316,17 @@ Design tokens are managed via [Style Dictionary](https://styledictionary.com/) a
 ### Typography
 - **Heading**: Space Grotesk
 - **Body**: Poppins
+
+### Accessibility (WCAG2 AA Compliance)
+The design system is built with accessibility in mind and follows WCAG2 AA standards:
+
+- **Keyboard Navigation**: All interactive elements are keyboard accessible
+- **Focus Indicators**: Visible focus states with minimum 3:1 contrast ratio
+- **ARIA Attributes**: Proper ARIA labels, roles, and live regions
+- **Screen Reader Support**: Semantic HTML and screen reader only content utilities
+- **Skip Links**: Skip to main content functionality
+- **Reduced Motion**: Respects `prefers-reduced-motion` user preference
+- **Color Contrast**: All text meets WCAG2 AA contrast requirements (4.5:1 for normal text, 3:1 for large text)
 
 ### Dark Mode
 The design system supports comprehensive dark mode with automatic theme switching:
@@ -359,6 +398,13 @@ Visit `http://localhost:6006` to view:
 - **Requirement Check**: Validation requirement display
 - **Score Display**: Metric/score display with gradient
 - **Table**: Styled data tables with hover effects
+- **Navigation Link**: Navigation link with active state
+- **Toast**: Toast notifications with multiple variants
+- **Status Badge**: Status badges with various states
+- **Organization Tree**: Expandable tree component
+- **Footer**: Responsive footer component
+- **Form Step**: Multi-step form component
+- **Language Button**: Language selector button
 
 ## 🤖 Automated Publishing
 

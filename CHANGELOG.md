@@ -14,16 +14,34 @@ All notable changes to this project will be documented in this file. See [standa
 * add Score Display component with gradient background for metrics
 * add Table component with hover effects and responsive design
 * add Card variants: hover-lift and stat-card for enhanced card displays
+* add Navigation Link component with active state support
+* add Toast Notification component with success/error/info/warning variants
+* add Status Badge variants (in-progress, pending, hr, completed, rejected)
+* add Organization Tree component with expand/collapse functionality
+* add Card Header component
+* add View Container component with fade-in animation
+* add Stat Card internal components (icon, content, label, value)
+* add Icon Placeholder component
+* add Footer component with responsive grid layout
+* add App Wrapper component for sticky footer layout
+* add Form Step component for multi-step forms
+* add Language Button component for language selection
+* add prefix-less class aliases for all components (backward compatibility)
 * add comprehensive dark mode support for all new components
 * add Storybook stories for all new components with multiple examples
+* add WCAG2 AA accessibility compliance (ARIA attributes, focus states, keyboard navigation)
 
 ### Improvements
 
 * enhance Card component with variant support (hover-lift, stat-card)
 * improve responsive design for Step Indicator (vertical layout on mobile)
 * add accessibility features: focus states, keyboard navigation, ARIA attributes
+* add WCAG2 AA compliance: skip links, reduced motion support, visible focus indicators
 * update README.md with comprehensive documentation for new components
 * add animation effects (pulse-glow) for active states in Timeline and Step Indicator
+* fix Storybook logo asset paths with staticDirs configuration
+* update Storybook to version 8.6.14 for better addon compatibility
+* add error handling for logo loading
 
 ## [2.1.0](https://github.com/istinyeuniversity/isu-design-system/compare/v2.0.0...v2.1.0) (2025-11-01)
 

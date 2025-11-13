@@ -1,8 +1,20 @@
 export function createLogo({ variant = 'blue', size = 'md', className = '' }) {
   const logo = document.createElement('img');
 
-  // Logo variants and paths
-  const logoPaths = {
+  // Detect if we're in Storybook
+  const isStorybook = typeof window !== 'undefined' && 
+    (window.location.href.includes('localhost:6006') || 
+     window.location.href.includes('storybook') ||
+     window.location.pathname.includes('iframe.html'));
+
+  // Logo paths - Storybook uses /logos/... (from .storybook/static)
+  // Production uses /assets/logos/... (from src/assets)
+  const logoPaths = isStorybook ? {
+    'blue': '/logos/en/logo-blue.svg',
+    'white': '/logos/en/logo-white.svg',
+    'blue-tr': '/logos/tr/logo-blue.svg',
+    'white-tr': '/logos/tr/logo-white.svg'
+  } : {
     'blue': '/assets/logos/en/logo-blue.svg',
     'white': '/assets/logos/en/logo-white.svg',
     'blue-tr': '/assets/logos/tr/logo-blue.svg',
@@ -20,6 +32,11 @@ export function createLogo({ variant = 'blue', size = 'md', className = '' }) {
   logo.src = logoPaths[variant] || logoPaths.blue;
   logo.alt = 'Istinye University Logo';
   logo.className = `${sizeClasses[size] || sizeClasses.md} ${className}`.trim();
+  
+  // Add error handler to help debug
+  logo.onerror = function() {
+    console.warn(`Logo not found: ${logo.src}. Expected path: ${logoPaths[variant]}`);
+  };
 
   return logo;
 }

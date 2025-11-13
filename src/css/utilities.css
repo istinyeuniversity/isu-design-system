@@ -5,9 +5,37 @@
     @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
   }
 
-  /* Focus styles */
+  /* Focus styles - WCAG2 AA compliant */
   .isu-focus-ring {
     @apply focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2;
+  }
+
+  /* WCAG2 AA: Skip to main content link */
+  .isu-skip-link {
+    @apply absolute top-0 left-0 z-50 px-4 py-2 bg-primary text-white rounded-br-lg;
+    transform: translateY(-100%);
+    transition: transform 0.2s;
+  }
+
+  .isu-skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* WCAG2 AA: Visible focus indicators for all interactive elements */
+  .isu-focus-visible {
+    outline: 2px solid var(--isu-primary);
+    outline-offset: 2px;
+  }
+
+  /* WCAG2 AA: Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   /* Scrollbar styling */

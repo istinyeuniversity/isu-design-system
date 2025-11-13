@@ -16,6 +16,9 @@ const config = {
   features: {
     cursor: false,
   },
+  // Static files directory for assets
+  // Maps src/assets to /assets and .storybook/static to / in Storybook
+  staticDirs: ['../src/assets', './static'],
 };
 
 export default config;
