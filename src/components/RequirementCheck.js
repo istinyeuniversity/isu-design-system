@@ -6,12 +6,11 @@ export function createRequirementCheck({ met = false, text = '' }) {
   check.setAttribute('aria-label', met ? `Şart sağlandı: ${text}` : `Şart sağlanmadı: ${text}`);
 
   const icon = document.createElement('div');
-  icon.className = 'isu-requirement-icon';
+  icon.className = `isu-check-icon ${met ? 'met' : 'not-met'}`;
   icon.setAttribute('aria-hidden', 'true');
   check.appendChild(icon);
 
-  const textEl = document.createElement('div');
-  textEl.className = 'isu-requirement-text';
+  const textEl = document.createElement('span');
   textEl.textContent = text;
   check.appendChild(textEl);
 

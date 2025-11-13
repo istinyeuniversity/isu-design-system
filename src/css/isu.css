@@ -980,10 +980,14 @@
 
   /* ------ Requirement Check Component ------ */
   .isu-requirement-check {
-    @apply flex items-center gap-3 p-3 rounded-lg border transition-all duration-200;
+    @apply flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 mb-2;
     font-family: var(--font-body);
     background-color: var(--bg-secondary);
     border-color: var(--border-primary);
+  }
+
+  .isu-requirement-check:last-child {
+    @apply mb-0;
   }
 
   .isu-requirement-check.met {
@@ -998,15 +1002,18 @@
     color: var(--error);
   }
 
-  .isu-requirement-icon {
+  .isu-requirement-icon,
+  .isu-check-icon {
     @apply text-xl font-bold flex-shrink-0;
   }
 
-  .isu-requirement-check.met .isu-requirement-icon::before {
+  .isu-requirement-check.met .isu-requirement-icon::before,
+  .isu-check-icon.met::before {
     content: '✓';
   }
 
-  .isu-requirement-check.not-met .isu-requirement-icon::before {
+  .isu-requirement-check.not-met .isu-requirement-icon::before,
+  .isu-check-icon.not-met::before {
     content: '✗';
   }
 
@@ -1426,10 +1433,15 @@
 
   .requirement-check,
   .isu-requirement-check {
-    @apply flex items-center gap-3 p-3 rounded-lg border transition-all duration-200;
+    @apply flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 mb-2;
     font-family: var(--font-body);
     background-color: var(--bg-secondary);
     border-color: var(--border-primary);
+  }
+
+  .requirement-check:last-child,
+  .isu-requirement-check:last-child {
+    @apply mb-0;
   }
 
   .requirement-check.met,
@@ -1447,17 +1459,20 @@
   }
 
   .check-icon,
-  .isu-requirement-icon {
+  .isu-requirement-icon,
+  .isu-check-icon {
     @apply text-xl font-bold flex-shrink-0;
   }
 
   .requirement-check.met .check-icon::before,
-  .isu-requirement-check.met .isu-requirement-icon::before {
+  .isu-requirement-check.met .isu-requirement-icon::before,
+  .isu-check-icon.met::before {
     content: '✓';
   }
 
   .requirement-check.not-met .check-icon::before,
-  .isu-requirement-check.not-met .isu-requirement-icon::before {
+  .isu-requirement-check.not-met .isu-requirement-icon::before,
+  .isu-check-icon.not-met::before {
     content: '✗';
   }
 
