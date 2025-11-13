@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file. See [standa
 * add View Container component with fade-in animation
 * add Stat Card internal components (icon, content, label, value)
 * add Icon Placeholder component
-* add Footer component with responsive grid layout
+* add Footer component with responsive grid layout (JavaScript component and Storybook stories)
 * add App Wrapper component for sticky footer layout
 * add Form Step component for multi-step forms
 * add Language Button component for language selection

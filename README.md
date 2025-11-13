@@ -79,6 +79,8 @@ import 'isu-design-system/dist/isu.css';
 // Import individual components
 import { createButton, createCard, createInput } from 'isu-design-system/src/components/Button.js';
 import { createAlert, createBadge } from 'isu-design-system/src/components/Feedback.js';
+import { createFooter } from 'isu-design-system/src/components/Footer.js';
+import { createTimeline } from 'isu-design-system/src/components/Timeline.js';
 
 // Use components
 const button = createButton({
@@ -91,6 +93,20 @@ const alert = createAlert({
   type: 'success',
   title: 'Success!',
   description: 'Operation completed successfully.'
+});
+
+const footer = createFooter({
+  logoVariant: 'blue-tr',
+  universityName: 'İstinye Üniversitesi',
+  contact: {
+    email: 'ik@istinye.edu.tr',
+    phone: '+90 (216) 577 55 55'
+  },
+  links: [
+    { href: '#', text: 'Gizlilik Politikası' },
+    { href: '#', text: 'Kullanım Koşulları' }
+  ],
+  copyright: '© 2025 İstinye Üniversitesi. Tüm hakları saklıdır.'
 });
 ```
 
@@ -402,7 +418,7 @@ Visit `http://localhost:6006` to view:
 - **Toast**: Toast notifications with multiple variants
 - **Status Badge**: Status badges with various states
 - **Organization Tree**: Expandable tree component
-- **Footer**: Responsive footer component
+- **Footer**: Responsive footer component with logo, contact info, and links
 - **Form Step**: Multi-step form component
 - **Language Button**: Language selector button
 
