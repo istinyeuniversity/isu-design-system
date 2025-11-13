@@ -168,6 +168,8 @@ function useTheme() {
 - `.isu-grid`, `.isu-grid-2`, `.isu-grid-3`, `.isu-grid-4` - Responsive grid systems
 - `.isu-flex`, `.isu-flex-between`, `.isu-flex-center` - Flexbox utilities
 - `.isu-card`, `.isu-card-hover` - Card components with optional hover effects
+- `.isu-card.hover-lift` - Card with lift animation on hover
+- `.isu-card.stat-card` - Statistic card variant for displaying metrics
 - `.isu-section`, `.isu-section-sm`, `.isu-section-lg` - Section spacing utilities
 
 ### Typography Components
@@ -199,9 +201,41 @@ function useTheme() {
 - `.isu-progress`, `.isu-progress-bar` - Progress indicators
 - `.isu-toast-success/error/warning` - Toast notification variants
 
+### Process Components
+- `.isu-timeline` - Timeline component for process tracking
+  - `.isu-timeline-item.completed/active/pending` - Timeline item states
+  - `.isu-timeline-marker` - Timeline marker indicator
+  - `.isu-timeline-content`, `.isu-timeline-title`, `.isu-timeline-date`, `.isu-timeline-person`, `.isu-timeline-note` - Timeline content elements
+- `.isu-step-indicator` - Multi-step form indicator
+  - `.isu-step.completed/active/pending` - Step states
+  - `.isu-step-circle` - Step number circle
+  - `.isu-step-label` - Step label text
+
+### Data Display Components
+- `.isu-table` - Styled data table with hover effects
+  - `.isu-table thead`, `.isu-table tbody` - Table sections
+  - `.isu-table th`, `.isu-table td` - Table cells
+- `.isu-score-display` - Score/metric display with gradient background
+  - `.isu-score-value` - Large score value
+  - `.isu-score-label` - Score label
+  - `.isu-score-max` - Maximum value indicator
+- `.isu-requirement-check` - Requirement validation display
+  - `.isu-requirement-check.met` - Met requirement (green)
+  - `.isu-requirement-check.not-met` - Unmet requirement (red)
+  - `.isu-requirement-icon` - Check/cross icon
+  - `.isu-requirement-text` - Requirement text
+
+### File Upload Component
+- `.isu-file-upload` - File upload container
+  - `.isu-file-upload-area` - Drag & drop upload area
+  - `.isu-file-upload.dragover` - Drag over state
+  - `.isu-file-upload-icon` - Upload icon
+  - `.isu-file-upload-text` - Upload text
+  - `.isu-file-upload-hint` - Helper text
+
 ### Button System
 - `.isu-button` - Base button component
-- Size variants: `.isu-button-sm/md/lg/xl`
+- Size variants: `.isu-button-sm/md/lg/xl` (small variant now available)
 - Color variants: `.isu-button-primary/secondary/ghost/outline/success/warning/error`
 - `.isu-button-group` - Button grouping utility
 - `.isu-button-loading` - Loading state for buttons
@@ -315,10 +349,16 @@ Visit `http://localhost:6006` to view:
 ### Available Stories
 - **Button**: Primary, secondary, ghost, outline, success, warning, error variants
 - **Forms**: Input, textarea, select, checkbox, radio, form groups
-- **Layout**: Cards, grids, containers, flex utilities
+- **Layout**: Cards (including hover-lift and stat-card variants), grids, containers, flex utilities
 - **Feedback**: Alerts, badges, spinners, progress bars, toasts
 - **Navigation**: Breadcrumbs, pagination, tabs
 - **Typography**: Headings, body text, links, quotes
+- **Timeline**: Process tracking with completed/active/pending states
+- **Step Indicator**: Multi-step form progress indicator
+- **File Upload**: Drag & drop file upload area
+- **Requirement Check**: Validation requirement display
+- **Score Display**: Metric/score display with gradient
+- **Table**: Styled data tables with hover effects
 
 ## 🤖 Automated Publishing
 
@@ -377,7 +417,13 @@ isu-design-system/
 │   │   ├── Feedback.js          # Alert, badge, spinner components
 │   │   ├── Navigation.js        # Breadcrumb, pagination components
 │   │   ├── Typography.js        # Text components and stories
-│   │   └── Logo.js              # Logo component
+│   │   ├── Logo.js              # Logo component
+│   │   ├── Timeline.js          # Timeline component for process tracking
+│   │   ├── StepIndicator.js     # Multi-step form indicator
+│   │   ├── FileUpload.js        # File upload component
+│   │   ├── RequirementCheck.js  # Requirement validation display
+│   │   ├── ScoreDisplay.js      # Score/metric display component
+│   │   └── Table.js              # Data table component
 │   ├── styles/
 │   │   └── tokens.css           # Auto-generated design tokens
 │   └── assets/logos/            # University logos (EN/TR variants)

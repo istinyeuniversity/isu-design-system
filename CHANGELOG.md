@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/istinyeuniversity/isu-design-system/compare/v2.1.1...v2.2.0) (2025-11-13)
+
+### Features
+
+* add components required for Akademik Atama ve Yükseltme project
+* add Timeline component for process tracking with completed/active/pending states
+* add Step Indicator component for multi-step forms with responsive design
+* add File Upload component with drag & drop support and keyboard accessibility
+* add Requirement Check component for validation display (met/not-met states)
+* add Score Display component with gradient background for metrics
+* add Table component with hover effects and responsive design
+* add Card variants: hover-lift and stat-card for enhanced card displays
+* add comprehensive dark mode support for all new components
+* add Storybook stories for all new components with multiple examples
+
+### Improvements
+
+* enhance Card component with variant support (hover-lift, stat-card)
+* improve responsive design for Step Indicator (vertical layout on mobile)
+* add accessibility features: focus states, keyboard navigation, ARIA attributes
+* update README.md with comprehensive documentation for new components
+* add animation effects (pulse-glow) for active states in Timeline and Step Indicator
+
 ## [2.1.0](https://github.com/istinyeuniversity/isu-design-system/compare/v2.0.0...v2.1.0) (2025-11-01)
 
 ### Features

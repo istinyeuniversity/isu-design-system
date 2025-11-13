@@ -1,6 +1,14 @@
-export function createCard({ title = '', content = '', footer = '', hover = false }) {
+export function createCard({ title = '', content = '', footer = '', hover = false, variant = null }) {
   const card = document.createElement('div');
-  card.className = hover ? 'isu-card-hover' : 'isu-card';
+  let className = hover ? 'isu-card-hover' : 'isu-card';
+  
+  if (variant === 'hover-lift') {
+    className = 'isu-card hover-lift';
+  } else if (variant === 'stat-card') {
+    className = 'isu-card stat-card';
+  }
+  
+  card.className = className;
 
   if (title) {
     const titleEl = document.createElement('h3');

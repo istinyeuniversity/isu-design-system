@@ -8,8 +8,8 @@ export default {
   },
 };
 
-const CardTemplate = ({ title, content, footer, hover }) => {
-  return createCard({ title, content, footer, hover });
+const CardTemplate = ({ title, content, footer, hover, variant }) => {
+  return createCard({ title, content, footer, hover, variant });
 };
 
 const GridTemplate = ({ columns, cards }) => {
@@ -55,6 +55,42 @@ EmptyCard.args = {
   content: 'This card has no title, just content.',
   footer: '',
   hover: false,
+};
+
+export const HoverLiftCard = CardTemplate.bind({});
+HoverLiftCard.args = {
+  title: 'Hover Lift Card',
+  content: 'This card lifts up on hover - try hovering over it!',
+  footer: '<button class="isu-btn-primary isu-button-sm">Learn More</button>',
+  hover: false,
+  variant: 'hover-lift',
+};
+
+export const StatCard = CardTemplate.bind({});
+StatCard.args = {
+  title: '125',
+  content: 'Toplam Başvuru',
+  footer: '',
+  hover: false,
+  variant: 'stat-card',
+};
+
+export const StatCardsGrid = () => {
+  const stats = [
+    { title: '125', content: 'Toplam Başvuru' },
+    { title: '89', content: 'Onay Bekleyen' },
+    { title: '36', content: 'Tamamlanan' },
+  ];
+
+  const cards = stats.map(stat => 
+    createCard({
+      title: stat.title,
+      content: stat.content,
+      variant: 'stat-card'
+    })
+  );
+
+  return createGrid({ columns: 3, children: cards });
 };
 
 // Grid Stories
