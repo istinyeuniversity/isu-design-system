@@ -1288,8 +1288,14 @@
 
   .isu-lang-btn.active {
     background-color: var(--isu-primary);
-    border-color: var(--isu-primary);
     color: white;
+    border-color: var(--isu-primary);
+  }
+
+  .isu-lang-btn:not(.active) {
+    background-color: #e5e7eb;
+    color: #6b7280;
+    border-color: #e5e7eb;
   }
 
   /* ------ Prefix-less aliases for compatibility ------ */
@@ -1629,8 +1635,14 @@
   .lang-btn.active,
   .isu-lang-btn.active {
     background-color: var(--isu-primary);
-    border-color: var(--isu-primary);
     color: white;
+    border-color: var(--isu-primary);
+  }
+
+  .isu-lang-btn:not(.active) {
+    background-color: #e5e7eb;
+    color: #6b7280;
+    border-color: #e5e7eb;
   }
 
   .stat-card,
