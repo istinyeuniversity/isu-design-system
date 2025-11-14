@@ -1002,9 +1002,29 @@
     color: var(--error);
   }
 
-  .isu-requirement-icon,
-  .isu-check-icon {
+  .isu-requirement-icon {
     @apply text-xl font-bold flex-shrink-0;
+  }
+
+  /* Requirement Check Icon */
+  .isu-check-icon {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .isu-check-icon.met {
+    color: var(--success);
+  }
+
+  .isu-check-icon.not-met {
+    color: var(--error);
   }
 
   .isu-requirement-check.met .isu-requirement-icon::before,
@@ -1020,6 +1040,14 @@
   .isu-requirement-text {
     @apply flex-1 text-sm;
     color: inherit;
+  }
+
+  /* Requirements List Container */
+  #requirements-list,
+  .isu-requirements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   /* ------ Score Display Component ------ */
@@ -1459,9 +1487,29 @@
   }
 
   .check-icon,
-  .isu-requirement-icon,
-  .isu-check-icon {
+  .isu-requirement-icon {
     @apply text-xl font-bold flex-shrink-0;
+  }
+
+  /* Requirement Check Icon */
+  .isu-check-icon {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .isu-check-icon.met {
+    color: var(--success);
+  }
+
+  .isu-check-icon.not-met {
+    color: var(--error);
   }
 
   .requirement-check.met .check-icon::before,
