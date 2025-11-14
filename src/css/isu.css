@@ -390,7 +390,7 @@
 
   .isu-card {
     @apply rounded-lg border-2 p-6 shadow-sm;
-    background-color: var(--bg-secondary);
+    background-color: white;
     color: var(--text-primary);
     border-color: var(--border-primary);
   }
