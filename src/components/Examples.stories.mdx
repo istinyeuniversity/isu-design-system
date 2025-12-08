@@ -1,0 +1,33 @@
+import { Meta, Canvas, Source } from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
+import * as CardStories from './Card.stories';
+import * as RequirementCheckStories from './RequirementCheck.stories';
+import * as TableStories from './Table.stories';
+import * as FooterStories from './Footer.stories';
+
+<Meta title="Examples/Showcase" />
+
+# Component Examples
+
+Bootstrap’ın Examples sayfasındaki gibi hızlı bir galeri: canlı önizleme ve altında kod snippet’i.
+
+## Buttons
+<Canvas of={ButtonStories.Primary} />
+<Source of={ButtonStories.Primary} />
+
+## Cards
+<Canvas of={CardStories.Default} />
+<Source of={CardStories.Default} />
+
+## Requirement Check
+<Canvas of={RequirementCheckStories.MultipleRequirements} />
+<Source of={RequirementCheckStories.MultipleRequirements} />
+
+## Table
+<Canvas of={TableStories.Basic} />
+<Source of={TableStories.Basic} />
+
+## Footer
+<Canvas of={FooterStories.Default} />
+<Source of={FooterStories.Default} />
+
