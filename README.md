@@ -29,6 +29,12 @@ npm install isu-design-system
 </html>
 ```
 
+### Storybook Examples / Snippets
+
+- Çalıştırma: `npm run storybook`
+- Statik çıktı: `npm run build-storybook`
+- Storybook Docs içinde “Examples/Showcase” sayfasında canlı önizleme + kod snippet’leri (Canvas + Source) görebilirsiniz.
+
 ### With Tailwind CSS Preset
 ```javascript
 // tailwind.config.js
