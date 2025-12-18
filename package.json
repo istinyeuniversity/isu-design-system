@@ -1,6 +1,6 @@
 {
   "name": "isu-design-system",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "type": "module",
   "description": "Official design system for Istinye University - Tailwind CSS based components and styles",
   "main": "dist/isu.css",
