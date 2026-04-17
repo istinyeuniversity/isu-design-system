@@ -1,4 +1,4 @@
-import { createButton } from './Button.js';
+import { createButton, createButtonGroup } from './Button.js';
 
 export default {
   title: 'Components/Button',
@@ -13,6 +13,7 @@ export default {
       options: ['sm', 'md', 'lg', 'xl'],
     },
     disabled: { control: 'boolean' },
+    loading: { control: 'boolean' },
   },
 };
 
@@ -90,3 +91,22 @@ Disabled.args = {
   size: 'md',
   disabled: true,
 };
+
+export const Loading = Template.bind({});
+Loading.args = {
+  label: 'Saving...',
+  variant: 'primary',
+  size: 'md',
+  loading: true,
+};
+
+export const ButtonGroup = () =>
+  createButtonGroup({
+    ariaLabel: 'Text alignment',
+    buttons: [
+      { label: 'Left',   variant: 'secondary' },
+      { label: 'Center', variant: 'secondary' },
+      { label: 'Right',  variant: 'secondary' },
+    ],
+  });
+ButtonGroup.storyName = 'Button Group';
