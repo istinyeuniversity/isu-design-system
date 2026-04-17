@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## Unreleased
+## [2.3.0](https://github.com/istinyeuniversity/isu-design-system/compare/v2.2.2...v2.3.0) (2026-04-17)
 
-### Docs
 
-* add Storybook “Examples/Showcase” page with live previews and code snippets
+### Features
+
+* extend component library and harden accessibility ([1d7232c](https://github.com/istinyeuniversity/isu-design-system/commit/1d7232c3d47bc02471e1973d4d3341f96e0f4a1d))
 
 ## [2.2.0](https://github.com/istinyeuniversity/isu-design-system/compare/v2.1.1...v2.2.0) (2025-11-13)
 
