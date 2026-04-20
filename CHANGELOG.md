@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/istinyeuniversity/isu-design-system/compare/v2.3.0...v2.4.0) (2026-04-20)
+
+
+### Features
+
+* ship a bundled IIFE JS distribution at `dist/isu.js` that exposes a global `window.ISU` API with every factory function (`createDrawer`, `createModal`, `createAccordion`, `createTabs`, `attachTooltip`, `createSwitch`, ...)
+* ship an ESM bundle at `dist/isu.esm.js` for module-based consumers
+* add declarative **data-attribute auto-init** (`data-isu-drawer-target`, `data-isu-modal-target`, `data-isu-accordion`, `data-isu-tabs`, `data-isu-tooltip`, `data-isu-switch`) so interactive components work in server-rendered apps (e.g. ASP.NET MVC Razor) with zero hand-written JavaScript
+* include `src/` sources in the published tarball so individual modules (`isu-design-system/src/components/Drawer.js`) can be imported in bundler-based projects
+
+
+### Fixes
+
+* **package**: the published npm tarball previously only contained `dist/isu.css`; interactive components (Drawer, Accordion, Modal, Tabs, Tooltip, Switch) were unusable via plain HTML. They now work out-of-the-box by adding a single `<script src=".../dist/isu.js" defer></script>` tag.
+
 ## [2.3.0](https://github.com/istinyeuniversity/isu-design-system/compare/v2.2.2...v2.3.0) (2026-04-17)
 
 

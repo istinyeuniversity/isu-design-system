@@ -1,24 +1,36 @@
 {
   "name": "isu-design-system",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "type": "module",
   "description": "Official design system for Istinye University - Tailwind CSS based components and styles",
-  "main": "dist/isu.css",
+  "main": "dist/isu.js",
+  "style": "dist/isu.css",
   "tailwind": "./tailwind-preset.js",
   "exports": {
-    ".": "./dist/isu.css",
+    ".": {
+      "import": "./dist/isu.esm.js",
+      "require": "./dist/isu.js",
+      "default": "./dist/isu.js"
+    },
+    "./dist/isu.js": "./dist/isu.js",
+    "./dist/isu.esm.js": "./dist/isu.esm.js",
+    "./dist/isu.css": "./dist/isu.css",
     "./tailwind-preset.js": "./tailwind-preset.js",
     "./src/css/isu.css": "./src/css/isu.css",
     "./src/components/*": "./src/components/*"
   },
   "files": [
     "dist/",
+    "src/",
     "tailwind-preset.js"
   ],
   "scripts": {
-    "build": "npm run tokens && npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --minify",
-    "dev": "npm run tokens && npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --watch",
     "tokens": "node build-tokens.js",
+    "build:css": "npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --minify",
+    "build:js": "esbuild src/index.js --bundle --format=iife --global-name=ISU --minify --outfile=dist/isu.js --banner:js=\"/*! isu-design-system v2.4.0 | MIT */\"",
+    "build:esm": "esbuild src/index.js --bundle --format=esm --minify --outfile=dist/isu.esm.js --banner:js=\"/*! isu-design-system v2.4.0 | MIT */\"",
+    "build": "npm run tokens && npm run build:css && npm run build:js && npm run build:esm",
+    "dev": "npm run tokens && npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --watch",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "release": "standard-version",
@@ -50,6 +62,7 @@
     "@storybook/html": "^8.6.14",
     "@storybook/html-vite": "^8.6.14",
     "autoprefixer": "^10.4.21",
+    "esbuild": "^0.24.2",
     "postcss": "^8.5.6",
     "standard-version": "^9.5.0",
     "storybook": "^8.6.14",

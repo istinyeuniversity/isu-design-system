@@ -15,7 +15,7 @@ npm install isu-design-system
 
 ## 📖 Usage
 
-### Direct HTML Usage
+### Direct HTML Usage (CSS only)
 ```html
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
@@ -28,6 +28,174 @@ npm install isu-design-system
 </body>
 </html>
 ```
+
+### Plain HTML / Server-Rendered Apps (CSS + JS)
+
+Interactive components (Drawer, Modal, Accordion, Tabs, Tooltip, Switch) require the JavaScript bundle. Add the `dist/isu.js` IIFE bundle; it auto-initializes any element with `data-isu-*` attributes on `DOMContentLoaded` and also exposes a global `window.ISU` for imperative use.
+
+```html
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <link rel="stylesheet" href="/node_modules/isu-design-system/dist/isu.css" />
+  <script src="/node_modules/isu-design-system/dist/isu.js" defer></script>
+</head>
+<body>
+  <!-- Drawer trigger + hidden template -->
+  <button class="isu-button-primary" data-isu-drawer-target="#profileDrawer">Open Drawer</button>
+  <template id="profileDrawer" data-isu-drawer data-side="right" data-size="md" data-title="Profile">
+    <p>Put any HTML here. The drawer is mounted on trigger click.</p>
+    <button class="isu-button-primary">Save</button>
+  </template>
+</body>
+</html>
+```
+
+#### ASP.NET MVC / Razor (.cshtml)
+
+Install the package with npm and expose `node_modules/isu-design-system/dist/` as a static folder, or copy `dist/isu.js` and `dist/isu.css` under `wwwroot/lib/isu/`. Reference them in `Views/Shared/_Layout.cshtml`:
+
+```html
+<!-- _Layout.cshtml <head> -->
+<link rel="stylesheet" href="~/lib/isu/isu.css" asp-append-version="true" />
+<script src="~/lib/isu/isu.js" defer asp-append-version="true"></script>
+```
+
+Then use declarative markup in any view:
+
+```html
+@* Views/Home/Index.cshtml *@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="isu-container">
+    <button class="isu-button-primary" data-isu-drawer-target="#demoDrawer">Open Drawer</button>
+
+    <template id="demoDrawer"
+              data-isu-drawer
+              data-side="right"
+              data-size="md"
+              data-title="Details">
+        <p>This content is cloned into the drawer each time it opens.</p>
+    </template>
+
+    <div data-isu-accordion data-type="single" data-collapsible="true">
+        <div data-isu-accordion-item data-value="a" data-default-open>
+            <div data-isu-accordion-title>Section 1</div>
+            <div data-isu-accordion-body>Content 1</div>
+        </div>
+        <div data-isu-accordion-item data-value="b">
+            <div data-isu-accordion-title>Section 2</div>
+            <div data-isu-accordion-body>Content 2</div>
+        </div>
+    </div>
+</div>
+```
+
+### Declarative Data-Attribute API Reference
+
+All data attributes go on the elements shown. If new markup is inserted after page load (AJAX, partial views), call `window.ISU.init()` to rescan the DOM. The initializer is idempotent.
+
+#### Drawer
+```html
+<button data-isu-drawer-target="#myDrawer">Open</button>
+
+<template id="myDrawer"
+          data-isu-drawer
+          data-side="right"                <!-- left | right | top | bottom -->
+          data-size="md"                   <!-- sm | md | lg | xl -->
+          data-title="My Drawer"
+          data-close-on-backdrop="true"
+          data-close-on-escape="true"
+          data-closable="true">
+  <p>Any HTML...</p>
+</template>
+```
+
+#### Modal
+```html
+<button data-isu-modal-target="#myModal">Open</button>
+
+<template id="myModal"
+          data-isu-modal
+          data-size="md"                   <!-- sm | md | lg | xl | full -->
+          data-title="Confirm"
+          data-description="Optional subtitle"
+          data-close-on-backdrop="true"
+          data-close-on-escape="true">
+  <p>Modal body HTML...</p>
+</template>
+```
+
+#### Accordion
+```html
+<div data-isu-accordion
+     data-type="single"                   <!-- single | multiple -->
+     data-collapsible="true"
+     data-ghost="false"
+     data-heading-level="3">
+  <div data-isu-accordion-item data-value="a" data-default-open>
+    <div data-isu-accordion-title>Title</div>
+    <div data-isu-accordion-body>Body HTML</div>
+  </div>
+  <div data-isu-accordion-item data-value="b" data-disabled>
+    <div data-isu-accordion-title>Disabled Item</div>
+    <div data-isu-accordion-body>...</div>
+  </div>
+</div>
+```
+
+#### Tabs
+```html
+<div data-isu-tabs
+     data-orientation="horizontal"        <!-- horizontal | vertical -->
+     data-variant="line"                  <!-- line | pills -->
+     data-size="md"                       <!-- sm | md | lg -->
+     data-default-value="overview">
+  <div data-isu-tab data-value="overview" data-label="Overview">
+    Overview panel HTML
+  </div>
+  <div data-isu-tab data-value="details" data-label="Details">
+    Details panel HTML
+  </div>
+</div>
+```
+
+#### Tooltip
+```html
+<button data-isu-tooltip="Hint text" data-placement="top">?</button>
+```
+
+#### Switch
+```html
+<span data-isu-switch
+      data-label="Enable notifications"
+      data-description="Optional helper"
+      data-checked="true"
+      data-size="md"
+      data-name="notify"></span>
+```
+
+### Imperative JavaScript API
+
+The bundle also exposes every factory on `window.ISU` for ad-hoc use:
+
+```html
+<script>
+  const drawer = ISU.createDrawer({
+    title: 'Profile',
+    content: '<p>Custom HTML</p>',
+    side: 'right',
+    size: 'md',
+  });
+  document.getElementById('openBtn').addEventListener('click', () => {
+    ISU.openDrawer(drawer);
+  });
+</script>
+```
+
+Full list: `createDrawer`, `openDrawer`, `closeDrawer`, `createModal`, `openModal`, `closeModal`, `confirmModal`, `createAccordion`, `createTabs`, `attachTooltip`, `removeTooltip`, `createSwitch`, `createButton`, `createCard`, `createAvatar`, `createSlider`, `createRating`, `createFileUpload`, `createSearchbar`, `createCopyLink`, `createSkeleton`, `createKbd`, `createStat`, `createStatCard`, `createStepIndicator`, `createTimeline`, `createTable`, `createBreadcrumb`, `createPagination`, `createNavBar`, `createFooter`, `createEmptyState`, `createFab`, `createLogo`, and `init` (rescan DOM).
 
 ### Storybook Examples / Snippets
 
