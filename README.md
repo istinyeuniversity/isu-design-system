@@ -93,6 +93,97 @@ Then use declarative markup in any view:
 </div>
 ```
 
+#### FastAPI (Python + Jinja2)
+
+Install the package with npm and copy `dist/isu.css` + `dist/isu.js` under `static/vendor/isu/` (or mount `node_modules/isu-design-system/dist` as a static route). Typical project layout:
+
+```
+myapp/
+  main.py
+  static/
+    vendor/
+      isu/
+        isu.css
+        isu.js
+  templates/
+    base.html
+    index.html
+```
+
+Wire up static files and Jinja2 in `main.py`:
+
+```python
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+```
+
+Reference the CSS and JS bundle in `templates/base.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}ISU App{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='vendor/isu/isu.css') }}" />
+  <script src="{{ url_for('static', path='vendor/isu/isu.js') }}" defer></script>
+</head>
+<body>
+  {% block content %}{% endblock %}
+</body>
+</html>
+```
+
+Then use declarative markup in `templates/index.html`:
+
+```html
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="isu-container p-6">
+  <button class="isu-button-primary" data-isu-drawer-target="#demoDrawer">Open Drawer</button>
+
+  <template id="demoDrawer"
+            data-isu-drawer
+            data-side="right"
+            data-size="md"
+            data-title="Details">
+    <p>This content is cloned into the drawer each time it opens.</p>
+  </template>
+
+  <div class="mt-6" data-isu-accordion data-type="single" data-collapsible="true">
+    <div data-isu-accordion-item data-value="a" data-default-open>
+      <div data-isu-accordion-title>Section 1</div>
+      <div data-isu-accordion-body>Content 1</div>
+    </div>
+    <div data-isu-accordion-item data-value="b">
+      <div data-isu-accordion-title>Section 2</div>
+      <div data-isu-accordion-body>Content 2</div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+```
+
+For HTMX or other partial-response flows, call `ISU.init(newRoot)` after each swap so newly inserted `data-isu-*` elements get wired up:
+
+```html
+<body hx-on::after-swap="ISU.init(event.detail.target)">
+```
+
 ### Declarative Data-Attribute API Reference
 
 All data attributes go on the elements shown. If new markup is inserted after page load (AJAX, partial views), call `window.ISU.init()` to rescan the DOM. The initializer is idempotent.
@@ -367,8 +458,8 @@ function useTheme() {
 - `.isu-app-wrapper` - App wrapper for sticky footer layout
 - `.isu-section`, `.isu-section-sm`, `.isu-section-lg` - Section spacing utilities
 - `.isu-footer` - Footer component with responsive grid layout
-  - `.isu-footer-content`, `.isu-footer-brand`, `.isu-footer-logo`, `.isu-footer-university`
-  - `.isu-footer-contact`, `.isu-footer-links`, `.isu-footer-bottom`
+  - `.isu-footer-content`, `.isu-footer-brand`, `.isu-footer-logo`, `.isu-footer-university` - Footer header and branding parts
+  - `.isu-footer-contact`, `.isu-footer-links`, `.isu-footer-bottom` - Footer body and bottom strip parts
 
 ### Typography Components
 - `.isu-heading-1` through `.isu-heading-6` - Hierarchical heading styles
@@ -386,16 +477,16 @@ function useTheme() {
 - `.isu-btn-primary`, `.isu-btn-secondary`, `.isu-btn-ghost`, `.isu-btn-outline` - Button variants
 - `.isu-form-group`, `.isu-form-label`, `.isu-form-help`, `.isu-form-error` - Form layout utilities
 - `.isu-switch` - Toggle switch
-  - Parts: `.isu-switch-input`, `.isu-switch-track`, `.isu-switch-thumb`, `.isu-switch-label`, `.isu-switch-description`
-  - Sizes: `.isu-switch-sm/lg`
+  - `.isu-switch-input`, `.isu-switch-track`, `.isu-switch-thumb`, `.isu-switch-label`, `.isu-switch-description` - Switch internal parts
+  - `.isu-switch-sm/lg` - Size variants (default md)
 - `.isu-searchbar` - Search input with leading icon and clear button
-  - Sizes: `.isu-searchbar-sm/lg`
-  - Parts: `.isu-searchbar-icon`, `.isu-searchbar-input`, `.isu-searchbar-clear`
-  - State: `.has-value` (toggles clear button visibility)
+  - `.isu-searchbar-sm/lg` - Size variants (default md)
+  - `.isu-searchbar-icon`, `.isu-searchbar-input`, `.isu-searchbar-clear` - Searchbar internal parts
+  - `.has-value` - State class that reveals the clear button
 - `.isu-slider` - Styled native range input
-  - Sizes: `.isu-slider-sm/lg`
-  - Wrapper: `.isu-slider-group`, `.isu-slider-header`, `.isu-slider-label`, `.isu-slider-value`
-  - CSS variable: `--isu-slider-progress` (percent fill on the track)
+  - `.isu-slider-sm/lg` - Size variants (default md)
+  - `.isu-slider-group`, `.isu-slider-header`, `.isu-slider-label`, `.isu-slider-value` - Slider wrapper parts
+  - `--isu-slider-progress` - CSS variable for percent fill on the track
 
 ### Navigation Components
 - `.isu-nav`, `.isu-nav-container` - Navigation bar structure
@@ -457,71 +548,72 @@ function useTheme() {
 
 ### Overlay Components
 - `.isu-modal`, `.isu-modal-backdrop`, `.isu-modal-dialog` - Dialog overlay
-  - Sizes: `.isu-modal-sm/md/lg/xl/full`
-  - Parts: `.isu-modal-header`, `.isu-modal-title`, `.isu-modal-description`, `.isu-modal-body`, `.isu-modal-footer`, `.isu-modal-close`
-  - State: `.is-open` (+ `body.isu-no-scroll` for scroll-lock)
+  - `.isu-modal-sm/md/lg/xl/full` - Size variants
+  - `.isu-modal-header`, `.isu-modal-title`, `.isu-modal-description`, `.isu-modal-body`, `.isu-modal-footer`, `.isu-modal-close` - Modal internal parts
+  - `.is-open`, `body.isu-no-scroll` - Open state plus scroll-lock on body
 - `.isu-drawer-root`, `.isu-drawer`, `.isu-drawer-backdrop` - Side panel overlay
-  - Sides: `.isu-drawer-left/right/top/bottom`
-  - Sizes: `.isu-drawer-sm/md/lg/xl`
-  - Parts: `.isu-drawer-header`, `.isu-drawer-title`, `.isu-drawer-body`, `.isu-drawer-footer`, `.isu-drawer-close`
+  - `.isu-drawer-left/right/top/bottom` - Side placement variants
+  - `.isu-drawer-sm/md/lg/xl` - Size variants
+  - `.isu-drawer-header`, `.isu-drawer-title`, `.isu-drawer-body`, `.isu-drawer-footer`, `.isu-drawer-close` - Drawer internal parts
 - `[data-tooltip="text"]` - CSS-only tooltip (no JS required)
-  - Placement: `[data-tooltip-placement="top|right|bottom|left"]`
-  - Shows on `:hover`, `:focus-visible`, or `.is-open`
+  - `[data-tooltip-placement="top|right|bottom|left"]` - Placement attribute
+  - `:hover`, `:focus-visible`, `.is-open` - Trigger states
 
 ### Stat Components
 - `.isu-stat` - Key metric display (label + value + trend + description)
-  - Parts: `.isu-stat-header`, `.isu-stat-icon`, `.isu-stat-label`, `.isu-stat-value`, `.isu-stat-value-unit`, `.isu-stat-description`, `.isu-stat-footer`
-  - Trend: `.isu-stat-trend` + `.isu-stat-trend-up/down/neutral`
-  - Sizes: `.isu-stat-sm/md/lg/xl`
+  - `.isu-stat-header`, `.isu-stat-icon`, `.isu-stat-label`, `.isu-stat-value`, `.isu-stat-value-unit`, `.isu-stat-description`, `.isu-stat-footer` - Stat internal parts
+  - `.isu-stat-trend`, `.isu-stat-trend-up/down/neutral` - Trend indicator with direction variants
+  - `.isu-stat-sm/md/lg/xl` - Size variants
 - `.isu-stat-card` - Stat wrapped in a card (border + padding)
-  - Modifiers: `.isu-stat-card-hover` (lift on hover), `.isu-stat-card-accent` (top border)
-  - Accent colors: `.isu-stat-card-success/warning/error/info`
+  - `.isu-stat-card-hover` - Lift on hover modifier
+  - `.isu-stat-card-accent` - Top-border accent modifier
+  - `.isu-stat-card-success/warning/error/info` - Accent color variants
 - `.isu-stat-group` - Responsive grid layout (auto-fit, min 14rem)
 
 ### Layout & Navigation Extended
 - `.isu-accordion` - Collapsible content sections
-  - Items: `.isu-accordion-item`, `.isu-accordion-trigger`, `.isu-accordion-content`, `.isu-accordion-body`
-  - Chevron: `.isu-accordion-icon` (rotates via `aria-expanded="true"`)
-  - Variants: `.isu-accordion-ghost` (borderless)
-  - State: `[data-state="open|closed"]` on content
-  - Keyboard: Arrow keys, Home, End between triggers
+  - `.isu-accordion-item`, `.isu-accordion-trigger`, `.isu-accordion-content`, `.isu-accordion-body` - Accordion item parts
+  - `.isu-accordion-icon` - Chevron icon (rotates via `aria-expanded="true"`)
+  - `.isu-accordion-ghost` - Borderless variant
+  - `[data-state="open|closed"]` - Open/closed state attribute on content
+  - Arrow keys, Home, End - Keyboard navigation between triggers
 - `.isu-tabs` - Tabbed interface
-  - Parts: `.isu-tabs-list`, `.isu-tabs-trigger`, `.isu-tabs-panels`, `.isu-tabs-panel`
-  - Orientation: `.isu-tabs-vertical` (default horizontal)
-  - Variants: `.isu-tabs-pills`
-  - Sizes: `.isu-tabs-sm/lg` (default md)
-  - State: `[aria-selected="true"]` on trigger, active indicator via `::after`
-  - Keyboard: Arrow keys, Home, End, Enter/Space
+  - `.isu-tabs-list`, `.isu-tabs-trigger`, `.isu-tabs-panels`, `.isu-tabs-panel` - Tabs internal parts
+  - `.isu-tabs-vertical` - Vertical orientation (default horizontal)
+  - `.isu-tabs-pills` - Pills style variant
+  - `.isu-tabs-sm/lg` - Size variants (default md)
+  - `[aria-selected="true"]` - Active trigger state (active indicator via `::after`)
+  - Arrow keys, Home, End, Enter/Space - Keyboard navigation
 - `.isu-menu-root` - Dropdown / popover menu
-  - Parts: `.isu-menu`, `.isu-menu-item`, `.isu-menu-divider`, `.isu-menu-label`
-  - Item parts: `.isu-menu-item-icon`, `.isu-menu-item-label`, `.isu-menu-item-shortcut`
-  - Danger: `.isu-menu-item-danger`
-  - Placement: `.isu-menu-bottom-start/bottom-end/top-start/top-end`
-  - State: `.is-open` toggles visibility/animation
-  - Keyboard: Arrow keys, Home, End, Escape, Tab closes
+  - `.isu-menu`, `.isu-menu-item`, `.isu-menu-divider`, `.isu-menu-label` - Menu internal parts
+  - `.isu-menu-item-icon`, `.isu-menu-item-label`, `.isu-menu-item-shortcut` - Menu item inner parts
+  - `.isu-menu-item-danger` - Danger / destructive item variant
+  - `.isu-menu-bottom-start/bottom-end/top-start/top-end` - Placement variants
+  - `.is-open` - Toggles visibility and open animation
+  - Arrow keys, Home, End, Escape, Tab - Keyboard navigation (Tab closes)
 
 ### Display & Feedback Components
 - `.isu-avatar` - User avatar (initials, image, icon)
-  - Sizes: `.isu-avatar-xs/sm/md/lg/xl/2xl`
-  - Shapes: `.isu-avatar-rounded`, `.isu-avatar-square` (default circle)
-  - Variants: `.isu-avatar-primary/secondary/success/warning/error/info`
-  - Status: `.isu-avatar-status` + `.isu-avatar-status-online/offline/busy/away`
-  - Group: `.isu-avatar-group` (overlapping cluster with `+N` overflow)
+  - `.isu-avatar-xs/sm/md/lg/xl/2xl` - Size variants
+  - `.isu-avatar-rounded`, `.isu-avatar-square` - Shape variants (default circle)
+  - `.isu-avatar-primary/secondary/success/warning/error/info` - Color variants
+  - `.isu-avatar-status`, `.isu-avatar-status-online/offline/busy/away` - Status badge with state variants
+  - `.isu-avatar-group` - Overlapping cluster with `+N` overflow
 - `.isu-skeleton` - Loading placeholder with shimmer animation
-  - Variants: `.isu-skeleton-text`, `.isu-skeleton-heading`, `.isu-skeleton-circle`, `.isu-skeleton-rect`, `.isu-skeleton-button`
-  - Text sizes: `.isu-skeleton-text-sm/lg`
-  - Respects `prefers-reduced-motion`
+  - `.isu-skeleton-text`, `.isu-skeleton-heading`, `.isu-skeleton-circle`, `.isu-skeleton-rect`, `.isu-skeleton-button` - Shape variants
+  - `.isu-skeleton-text-sm/lg` - Text skeleton sizes
+  - `prefers-reduced-motion` - Honored for users who prefer reduced motion
 - `.isu-empty-state` - Empty state with icon + title + description + actions
-  - Size: `.isu-empty-state-sm` (default medium)
-  - Parts: `.isu-empty-state-icon`, `.isu-empty-state-title`, `.isu-empty-state-description`, `.isu-empty-state-actions`
+  - `.isu-empty-state-sm` - Small size variant (default medium)
+  - `.isu-empty-state-icon`, `.isu-empty-state-title`, `.isu-empty-state-description`, `.isu-empty-state-actions` - Empty state internal parts
 - `.isu-kbd` - Keyboard shortcut display
-  - Sizes: `.isu-kbd-sm/lg`
-  - Group: `.isu-kbd-group` + `.isu-kbd-plus` for multi-key combos
+  - `.isu-kbd-sm/lg` - Size variants
+  - `.isu-kbd-group`, `.isu-kbd-plus` - Multi-key combo group and separator
 - `.isu-rating` - Star rating (readonly or interactive, half-star precision)
-  - Sizes: `.isu-rating-sm/lg`
-  - State: `.isu-rating-readonly`
-  - Star state: `[data-fill="empty|half|full"]`
-  - Keyboard: arrow keys to adjust, Home/End for min/max
+  - `.isu-rating-sm/lg` - Size variants
+  - `.isu-rating-readonly` - Read-only state
+  - `[data-fill="empty|half|full"]` - Per-star fill state
+  - Arrow keys, Home, End - Keyboard controls (arrow keys adjust, Home/End set min/max)
 
 ### Additional Components
 - `.isu-icon-placeholder` - Icon placeholder component
@@ -529,19 +621,20 @@ function useTheme() {
 
 ### Button System
 - `.isu-button` - Base button component
-- Size variants: `.isu-button-sm/md/lg/xl`
-- Color variants: `.isu-button-primary/secondary/ghost/outline/success/warning/error`
+- `.isu-button-sm/md/lg/xl` - Size variants
+- `.isu-button-primary/secondary/ghost/outline/success/warning/error` - Color variants
 - `.isu-button-loading` - Loading state (shows inline spinner, blocks pointer events)
 - `.isu-button-group`, `.isu-button-group-vertical` - Button grouping utility
 - `.isu-icon-button` - Icon-only button
-  - Sizes: `.isu-icon-button-sm/md/lg`
-  - Variants: `.isu-icon-button-primary/outline/ghost/danger`
-  - Shape: `.isu-icon-button-circle`
-  - State: `.active`
+  - `.isu-icon-button-sm/md/lg` - Size variants
+  - `.isu-icon-button-primary/outline/ghost/danger` - Color variants
+  - `.isu-icon-button-circle` - Circular shape modifier
+  - `.active` - Active / pressed state
 - `.isu-fab` - Floating Action Button
-  - Sizes: `.isu-fab-sm/md/lg`
-  - Variants: `.isu-fab-secondary/success/error`
-  - Modifiers: `.isu-fab-extended` (pill with label), `.isu-fab-fixed` (bottom-right)
+  - `.isu-fab-sm/md/lg` - Size variants
+  - `.isu-fab-secondary/success/error` - Color variants
+  - `.isu-fab-extended` - Pill shape with label
+  - `.isu-fab-fixed` - Fixed position at bottom-right
 
 ### Utility Classes
 - `.isu-sr-only` - Screen reader only content
@@ -551,8 +644,8 @@ function useTheme() {
 - `.isu-scroll` - Custom scrollbar styling
 - `.isu-text-truncate`, `.isu-text-multiline` - Text truncation utilities
 - `.isu-aspect-*` - Aspect ratio utilities
-- Animation utilities: `.isu-animate-fade-in`, `.isu-animate-slide-up`, etc.
-- Reduced motion support via `prefers-reduced-motion` media query (WCAG2 AA)
+- `.isu-animate-fade-in`, `.isu-animate-slide-up`, etc. - Animation utilities
+- `prefers-reduced-motion` - Reduced motion support via media query (WCAG2 AA)
 
 ## 🛠️ Development
 
@@ -764,3 +857,7 @@ isu-design-system/
 ## 📝 License
 
 MIT License - Istinye University
+
+---
+
+Development contribution: Adem Aydemir
