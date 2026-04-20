@@ -1,9 +1,9 @@
-import { createDrawer, openDrawer } from './components/Drawer.js';
-import { createAccordion } from './components/Accordion.js';
-import { createModal, openModal } from './components/Modal.js';
-import { createTabs } from './components/Tabs.js';
-import { attachTooltip } from './components/Tooltip.js';
-import { createSwitch } from './components/Switch.js';
+import { createDrawer, openDrawer } from '../components/Drawer.js';
+import { createAccordion } from '../components/Accordion.js';
+import { createModal, openModal } from '../components/Modal.js';
+import { createTabs } from '../components/Tabs.js';
+import { attachTooltip } from '../components/Tooltip.js';
+import { createSwitch } from '../components/Switch.js';
 
 const INIT_FLAG = 'isuInitialized';
 
