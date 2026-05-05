@@ -185,7 +185,12 @@ export function createNavBar({ brand = 'ISU Design System', links = [] }) {
 
   // Mobile menu button
   const mobileBtn = document.createElement('button');
+  const mobileMenuId = `isu-nav-mobile-${Math.random().toString(36).slice(2, 8)}`;
   mobileBtn.className = 'isu-nav-mobile-btn';
+  mobileBtn.type = 'button';
+  mobileBtn.setAttribute('aria-label', 'Toggle navigation menu');
+  mobileBtn.setAttribute('aria-expanded', 'false');
+  mobileBtn.setAttribute('aria-controls', mobileMenuId);
   mobileBtn.innerHTML = `
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -198,8 +203,23 @@ export function createNavBar({ brand = 'ISU Design System', links = [] }) {
   // Mobile menu (hidden by default)
   const mobileMenu = document.createElement('div');
   mobileMenu.className = 'isu-nav-mobile';
-  mobileMenu.innerHTML = '<div class="isu-nav-mobile-menu"></div>';
+  mobileMenu.id = mobileMenuId;
+  const mobileMenuInner = document.createElement('div');
+  mobileMenuInner.className = 'isu-nav-mobile-menu';
+  links.forEach((link) => {
+    const linkEl = document.createElement('a');
+    linkEl.className = link.active ? 'isu-nav-mobile-link active' : 'isu-nav-mobile-link';
+    linkEl.href = link.href || '#';
+    linkEl.textContent = link.label;
+    mobileMenuInner.appendChild(linkEl);
+  });
+  mobileMenu.appendChild(mobileMenuInner);
   nav.appendChild(mobileMenu);
+
+  mobileBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('is-open');
+    mobileBtn.setAttribute('aria-expanded', String(isOpen));
+  });
 
   return nav;
 }

@@ -286,7 +286,7 @@ The bundle also exposes every factory on `window.ISU` for ad-hoc use:
 </script>
 ```
 
-Full list: `createDrawer`, `openDrawer`, `closeDrawer`, `createModal`, `openModal`, `closeModal`, `confirmModal`, `createAccordion`, `createTabs`, `attachTooltip`, `removeTooltip`, `createSwitch`, `createButton`, `createCard`, `createAvatar`, `createSlider`, `createRating`, `createFileUpload`, `createSearchbar`, `createCopyLink`, `createSkeleton`, `createKbd`, `createStat`, `createStatCard`, `createStepIndicator`, `createTimeline`, `createTable`, `createBreadcrumb`, `createPagination`, `createNavBar`, `createFooter`, `createEmptyState`, `createFab`, `createLogo`, and `init` (rescan DOM).
+Full list: `createDrawer`, `openDrawer`, `closeDrawer`, `createModal`, `openModal`, `closeModal`, `confirmModal`, `createAccordion`, `createTabs`, `attachTooltip`, `removeTooltip`, `createSwitch`, `createButton`, `createCard`, `createAvatar`, `createSlider`, `createRating`, `createFileUpload`, `createSearchbar`, `createCopyLink`, `createSkeleton`, `createKbd`, `createStat`, `createStatCard`, `createStepIndicator`, `createTimeline`, `createTable`, `createBreadcrumb`, `createPagination`, `createNavBar`, `createSidebar`, `createSidebarShell`, `createFooter`, `createEmptyState`, `createFab`, `createLogo`, and `init` (rescan DOM).
 
 ### Storybook Examples / Snippets
 
@@ -456,6 +456,8 @@ function useTheme() {
 - `.isu-view-container` - View container with fade-in animation
 - `.isu-view-container-active` - Active state for view container
 - `.isu-app-wrapper` - App wrapper for sticky footer layout
+- `.isu-layout-shell`, `.isu-layout-sidebar`, `.isu-layout-main`, `.isu-layout-content` - Hybrid desktop/mobile app shell for sidebar layouts
+- `.isu-layout-mobile-bar`, `.isu-sidebar-mobile-trigger` - Mobile top bar with drawer trigger
 - `.isu-section`, `.isu-section-sm`, `.isu-section-lg` - Section spacing utilities
 - `.isu-footer` - Footer component with responsive grid layout
   - `.isu-footer-content`, `.isu-footer-brand`, `.isu-footer-logo`, `.isu-footer-university` - Footer header and branding parts
@@ -494,6 +496,8 @@ function useTheme() {
 - `.isu-nav-mobile-link` - Navigation links
 - `.isu-breadcrumb`, `.isu-breadcrumb-link` - Breadcrumb navigation
 - `.isu-pagination` - Pagination controls
+- `.isu-sidebar`, `.isu-sidebar-header`, `.isu-sidebar-section`, `.isu-sidebar-group`, `.isu-sidebar-link` - Sidebar structure with nested groups
+- `.isu-sidebar-badge`, `.isu-sidebar-divider`, `.isu-sidebar-footer` - Sidebar utility parts
 
 ### Feedback Components
 - `.isu-alert-success/error/warning/info` - Alert message variants

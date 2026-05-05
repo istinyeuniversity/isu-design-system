@@ -25,6 +25,7 @@ import { createFab } from '../components/Fab.js';
 import { createRequirementCheck } from '../components/RequirementCheck.js';
 import { createScoreDisplay } from '../components/ScoreDisplay.js';
 import { createLogo, createLogoLink, createLogoWithText } from '../components/Logo.js';
+import { createSidebar, createSidebarShell } from '../components/Sidebar.js';
 import { initAuto } from './auto-init.js';
 
 const ISU = {
@@ -73,6 +74,8 @@ const ISU = {
   createLogo,
   createLogoLink,
   createLogoWithText,
+  createSidebar,
+  createSidebarShell,
   init: initAuto,
   version: '2.4.0',
 };
@@ -103,5 +106,7 @@ export {
   removeTooltip,
   createTooltipWrapper,
   createSwitch,
+  createSidebar,
+  createSidebarShell,
   initAuto,
 };
