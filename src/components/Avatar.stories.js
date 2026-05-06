@@ -12,7 +12,7 @@ export default {
     },
     shape: {
       control: { type: 'inline-radio' },
-      options: ['circle', 'rounded', 'square'],
+      options: ['circle', 'rounded-sm', 'square'],
     },
     variant: {
       control: { type: 'select' },

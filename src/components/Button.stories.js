@@ -6,7 +6,7 @@ export default {
     label: { control: 'text' },
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'outline', 'ghost', 'success', 'warning', 'error'],
+      options: ['primary', 'secondary', 'outline-solid', 'ghost', 'success', 'warning', 'error'],
     },
     size: {
       control: { type: 'select' },

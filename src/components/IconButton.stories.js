@@ -7,7 +7,7 @@ export default {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['default', 'primary', 'outline', 'ghost', 'danger'],
+      options: ['default', 'primary', 'outline-solid', 'ghost', 'danger'],
     },
     size: {
       control: { type: 'select' },
@@ -36,7 +36,7 @@ export const Variants = () => {
   wrap.style.display = 'flex';
   wrap.style.gap = '0.75rem';
   wrap.style.alignItems = 'center';
-  ['default', 'primary', 'outline', 'ghost', 'danger'].forEach((v) => {
+  ['default', 'primary', 'outline-solid', 'ghost', 'danger'].forEach((v) => {
     wrap.appendChild(
       createIconButton({ icon: editIcon, ariaLabel: `${v} edit`, variant: v })
     );

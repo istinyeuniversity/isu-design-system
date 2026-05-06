@@ -1,33 +1,5 @@
 /* ISU Custom Utilities */
 @layer utilities {
-  /* Visibility */
-  .isu-sr-only {
-    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
-  }
-
-  /* Focus styles - WCAG2 AA compliant */
-  .isu-focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2;
-  }
-
-  /* WCAG2 AA: Skip to main content link */
-  .isu-skip-link {
-    @apply absolute top-0 left-0 z-50 px-4 py-2 bg-primary text-white rounded-br-lg;
-    transform: translateY(-100%);
-    transition: transform 0.2s;
-  }
-
-  .isu-skip-link:focus {
-    transform: translateY(0);
-  }
-
-  /* WCAG2 AA: Visible focus indicators for all interactive elements */
-  .isu-focus-visible {
-    outline: 2px solid var(--isu-primary);
-    outline-offset: 2px;
-  }
-
-  /* WCAG2 AA: Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -36,77 +8,6 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-  }
-
-  /* Scrollbar styling */
-  .isu-scroll {
-    scrollbar-width: thin;
-    scrollbar-color: rgb(203 213 225) transparent;
-  }
-
-  .isu-scroll::-webkit-scrollbar {
-    @apply w-2 h-2;
-  }
-
-  .isu-scroll::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-
-  .isu-scroll::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 rounded-full;
-  }
-
-  .isu-scroll::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-400;
-  }
-
-  /* Text truncation */
-  .isu-text-truncate {
-    @apply overflow-hidden whitespace-nowrap text-ellipsis;
-  }
-
-  .isu-text-multiline {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* Aspect ratios */
-  .isu-aspect-square {
-    @apply aspect-square;
-  }
-
-  .isu-aspect-video {
-    @apply aspect-video;
-  }
-
-  .isu-aspect-16-9 {
-    aspect-ratio: 16 / 9;
-  }
-
-  .isu-aspect-4-3 {
-    aspect-ratio: 4 / 3;
-  }
-
-  /* Dark mode utilities */
-  @media (prefers-color-scheme: dark) {
-    .isu-dark-auto {
-      @apply dark:bg-gray-800 dark:text-white dark:border-gray-700;
-    }
-  }
-
-  /* Animation utilities */
-  .isu-animate-fade-in {
-    animation: fadeIn 0.3s ease-in-out;
-  }
-
-  .isu-animate-slide-up {
-    animation: slideUp 0.3s ease-out;
-  }
-
-  .isu-animate-bounce-in {
-    animation: bounceIn 0.6s ease-out;
   }
 }
 

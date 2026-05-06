@@ -1,0 +1,86 @@
+@utility isu-sr-only {
+  /* Visibility */
+  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+}
+@utility isu-focus-ring {
+  /* Focus styles - WCAG2 AA compliant */
+  @apply focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:ring-offset-2;
+}
+@utility isu-skip-link {
+  /* WCAG2 AA: Skip to main content link */
+  @apply absolute top-0 left-0 z-50 px-4 py-2 bg-primary text-white rounded-br-lg;
+  transform: translateY(-100%);
+  transition: transform 0.2s;
+
+  &:focus {
+    transform: translateY(0);
+  }
+}
+@utility isu-focus-visible {
+  /* WCAG2 AA: Visible focus indicators for all interactive elements */
+  outline: 2px solid var(--isu-primary);
+  outline-offset: 2px;
+}
+@utility isu-scroll {
+  /* WCAG2 AA: Reduced motion support */
+
+  /* Scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgb(203 213 225) transparent;
+
+  &::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+}
+@utility isu-text-truncate {
+  /* Text truncation */
+  @apply overflow-hidden whitespace-nowrap text-ellipsis;
+}
+@utility isu-text-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@utility isu-aspect-square {
+  /* Aspect ratios */
+  @apply aspect-square;
+}
+@utility isu-aspect-video {
+  @apply aspect-video;
+}
+@utility isu-aspect-16-9 {
+  aspect-ratio: 16 / 9;
+}
+@utility isu-aspect-4-3 {
+  aspect-ratio: 4 / 3;
+}
+@utility isu-dark-auto {
+  @media (prefers-color-scheme: dark) {
+    @apply dark:bg-gray-800 dark:text-white dark:border-gray-700;
+  }
+}
+@utility isu-animate-fade-in {
+  /* Dark mode utilities */
+
+  /* Animation utilities */
+  animation: fadeIn 0.3s ease-in-out;
+}
+@utility isu-animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+@utility isu-animate-bounce-in {
+  animation: bounceIn 0.6s ease-out;
+}
