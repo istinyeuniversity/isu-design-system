@@ -864,4 +864,4 @@ MIT License - Istinye University
 
 ---
 
-Development contribution: Adem Aydemir
+Development contribution: [Adem Aydemir](https://github.com/ademaydemir)

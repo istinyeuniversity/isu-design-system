@@ -1,6 +1,6 @@
 import '../dist/isu.css';
 
-/** @type { import('@storybook/html').Preview } */
+/** @type { import('@storybook/html-vite').Preview } */
 const preview = {
   parameters: {
     controls: {
