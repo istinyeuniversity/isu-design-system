@@ -8632,6 +8632,274 @@
 }
 
 /* ============================================
+   NUMBER INPUT — input with +/− stepper buttons
+   ============================================ */
+
+@utility isu-number-input {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--border-primary, #d4d4d4);
+  border-radius: 0.5rem;
+  background-color: var(--bg-primary, white);
+  overflow: hidden;
+  font-family: var(--font-body);
+
+  &:focus-within {
+    border-color: var(--isu-primary, #007fff);
+    box-shadow: 0 0 0 2px rgba(0, 127, 255, 0.2);
+  }
+}
+
+@utility isu-number-input-field {
+  flex: 1 1 auto;
+  width: 4rem;
+  min-width: 3rem;
+  border: none;
+  padding: 0.5rem 0.25rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--text-primary, #1a1a1a);
+  text-align: center;
+  background: transparent;
+
+  &:focus { outline: none; }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@utility isu-number-input-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  border: none;
+  background-color: var(--bg-secondary, #f5f5f5);
+  color: var(--text-primary, #1a1a1a);
+  cursor: pointer;
+  font-size: 1.125rem;
+  user-select: none;
+  font-family: inherit;
+  transition: background-color 120ms, color 120ms;
+
+  &:hover:not(:disabled) {
+    background-color: #e5e5e5;
+  }
+  &:active:not(:disabled) {
+    background-color: var(--isu-primary, #007fff);
+    color: white;
+  }
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  [data-theme="dark"] & {
+    background-color: var(--bg-hover, #404040);
+  }
+  [data-theme="dark"] &:hover:not(:disabled) {
+    background-color: #525252;
+  }
+}
+
+@utility isu-number-input-sm {
+  & .isu-number-input-field {
+    padding: 0.25rem 0.25rem;
+    font-size: 0.8125rem;
+  }
+  & .isu-number-input-btn {
+    width: 1.75rem;
+    font-size: 1rem;
+  }
+}
+
+@utility isu-number-input-lg {
+  & .isu-number-input-field {
+    padding: 0.625rem 0.5rem;
+    font-size: 1rem;
+  }
+  & .isu-number-input-btn {
+    width: 2.5rem;
+    font-size: 1.25rem;
+  }
+}
+
+@utility isu-number-input-disabled {
+  opacity: 0.6;
+}
+
+/* ============================================
+   PIN INPUT — N-box OTP / verification code input
+   ============================================ */
+
+@utility isu-pin-input {
+  display: inline-flex;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+}
+
+@utility isu-pin-input-box {
+  width: 2.75rem;
+  height: 3rem;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: 1px solid var(--border-primary, #d4d4d4);
+  border-radius: 0.5rem;
+  background-color: var(--bg-primary, white);
+  color: var(--text-primary, #1a1a1a);
+  caret-color: var(--isu-primary, #007fff);
+  transition: border-color 120ms, box-shadow 120ms;
+
+  &:focus {
+    outline: none;
+    border-color: var(--isu-primary, #007fff);
+    box-shadow: 0 0 0 2px rgba(0, 127, 255, 0.2);
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@utility isu-pin-input-sm {
+  gap: 0.375rem;
+  & .isu-pin-input-box {
+    width: 2.25rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+@utility isu-pin-input-lg {
+  gap: 0.625rem;
+  & .isu-pin-input-box {
+    width: 3.25rem;
+    height: 3.5rem;
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================
+   BANNER — page-level alert strip (Alert is inline, Toast is transient, Banner is global)
+   ============================================ */
+
+@utility isu-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-left: 4px solid;
+  font-family: var(--font-body);
+  width: 100%;
+
+  & .isu-banner-icon {
+    flex-shrink: 0;
+    margin-top: 0.0625rem;
+  }
+  & .isu-banner-content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  & .isu-banner-title {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--text-primary, #1a1a1a);
+    margin-bottom: 0.125rem;
+    font-family: var(--font-heading, inherit);
+  }
+  & .isu-banner-description {
+    font-size: 0.875rem;
+    color: var(--text-secondary, #525252);
+    line-height: 1.5;
+  }
+  & .isu-banner-action {
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+    align-self: center;
+  }
+  & .isu-banner-action-btn {
+    background: transparent;
+    border: 1px solid currentColor;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: inherit;
+    font-family: inherit;
+
+    &:hover { background-color: rgba(0, 0, 0, 0.05); }
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
+  & .isu-banner-close {
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--text-secondary, #525252);
+    opacity: 0.6;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    align-self: center;
+
+    &:hover { opacity: 1; }
+    &:focus-visible {
+      outline: 2px solid var(--isu-primary, #007fff);
+      outline-offset: 1px;
+    }
+  }
+}
+
+@utility isu-banner-info {
+  background-color: rgba(59, 130, 246, 0.08);
+  border-left-color: #3b82f6;
+
+  & .isu-banner-icon { color: #3b82f6; }
+}
+
+@utility isu-banner-success {
+  background-color: rgba(16, 185, 129, 0.08);
+  border-left-color: #10b981;
+
+  & .isu-banner-icon { color: #10b981; }
+}
+
+@utility isu-banner-warning {
+  background-color: rgba(245, 158, 11, 0.1);
+  border-left-color: #f59e0b;
+
+  & .isu-banner-icon { color: #f59e0b; }
+}
+
+@utility isu-banner-error {
+  background-color: rgba(239, 68, 68, 0.08);
+  border-left-color: #ef4444;
+
+  & .isu-banner-icon { color: #ef4444; }
+}
+
+@utility isu-banner-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+/* ============================================
    THEME TOGGLE UTILITY
    ============================================ */
 

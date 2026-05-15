@@ -205,3 +205,89 @@ export function createLoadingOverlay({ text = 'Loading...' }) {
 
   return overlay;
 }
+
+export function createBanner({
+  variant = 'info',
+  title = '',
+  description = '',
+  icon,
+  action,
+  dismissible = true,
+  sticky = false,
+  onDismiss,
+} = {}) {
+  const variantClasses = {
+    info: 'isu-banner-info',
+    success: 'isu-banner-success',
+    warning: 'isu-banner-warning',
+    error: 'isu-banner-error',
+  };
+  const banner = document.createElement('div');
+  banner.className = [
+    'isu-banner',
+    variantClasses[variant] || variantClasses.info,
+    sticky ? 'isu-banner-sticky' : '',
+  ].filter(Boolean).join(' ');
+  banner.setAttribute(
+    'role',
+    variant === 'error' || variant === 'warning' ? 'alert' : 'status'
+  );
+
+  const iconEl = document.createElement('div');
+  iconEl.className = 'isu-banner-icon';
+  iconEl.setAttribute('aria-hidden', 'true');
+  if (icon instanceof Element) iconEl.appendChild(icon.cloneNode(true));
+  else if (typeof icon === 'string' && icon) iconEl.innerHTML = icon;
+  else iconEl.innerHTML = getAlertIcon(variant);
+  banner.appendChild(iconEl);
+
+  const content = document.createElement('div');
+  content.className = 'isu-banner-content';
+  if (title) {
+    const t = document.createElement('div');
+    t.className = 'isu-banner-title';
+    t.textContent = title;
+    content.appendChild(t);
+  }
+  if (description) {
+    const d = document.createElement('div');
+    d.className = 'isu-banner-description';
+    if (description instanceof Element) d.appendChild(description.cloneNode(true));
+    else d.textContent = description;
+    content.appendChild(d);
+  }
+  banner.appendChild(content);
+
+  if (action) {
+    const actionWrap = document.createElement('div');
+    actionWrap.className = 'isu-banner-action';
+    if (action instanceof Element) {
+      actionWrap.appendChild(action);
+    } else if (action && typeof action === 'object' && action.label) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'isu-banner-action-btn';
+      btn.textContent = action.label;
+      if (typeof action.onClick === 'function') {
+        btn.addEventListener('click', action.onClick);
+      }
+      actionWrap.appendChild(btn);
+    }
+    banner.appendChild(actionWrap);
+  }
+
+  if (dismissible) {
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'isu-banner-close';
+    closeBtn.setAttribute('aria-label', 'Kapat');
+    closeBtn.innerHTML = '<span aria-hidden="true">×</span>';
+    closeBtn.addEventListener('click', () => {
+      banner.remove();
+      if (typeof onDismiss === 'function') onDismiss();
+    });
+    banner.appendChild(closeBtn);
+  }
+
+  return banner;
+}

@@ -4,7 +4,8 @@ import {
   createSpinner,
   createProgressBar,
   createToast,
-  createLoadingOverlay
+  createLoadingOverlay,
+  createBanner,
 } from './Feedback.js';
 
 export default {
@@ -239,3 +240,116 @@ export const LoadingOverlay = () => {
 export const SimpleLoadingOverlay = () => {
   return createLoadingOverlay({ text: 'Please wait...' });
 };
+
+// ============================================
+// createBanner — page-level alert strip
+// Alert inline (card içi) · Toast geçici (kayıp) · Banner global + kalıcı
+// ============================================
+
+const bannerWrap = (el) => {
+  const box = document.createElement('div');
+  box.style.cssText = 'width: 100%; max-width: 900px;';
+  box.appendChild(el);
+  return box;
+};
+
+export const Banner_ExamWeek = () =>
+  bannerWrap(
+    createBanner({
+      variant: 'info',
+      title: 'Sınav haftası başladı',
+      description:
+        '15-22 Mayıs 2026 arasında final sınavları yapılacak. Programınızı OBS üzerinden kontrol edin.',
+      action: {
+        label: 'Programı gör',
+        onClick: () => console.log('open exam schedule'),
+      },
+    })
+  );
+Banner_ExamWeek.storyName = 'Banner — info (exam week)';
+
+export const Banner_Maintenance = () =>
+  bannerWrap(
+    createBanner({
+      variant: 'warning',
+      title: 'Planlı sistem bakımı',
+      description:
+        'Cumartesi 02:00-06:00 arasında OBS, e-posta ve kütüphane sistemleri erişilemez olacaktır.',
+    })
+  );
+Banner_Maintenance.storyName = 'Banner — warning (system maintenance)';
+
+export const Banner_DeadlineExtended = () =>
+  bannerWrap(
+    createBanner({
+      variant: 'success',
+      title: 'Başvuru süresi uzatıldı',
+      description: 'Yüksek lisans başvuruları 30 Mayıs 2026 tarihine kadar uzatılmıştır.',
+      action: {
+        label: 'Başvur',
+        onClick: () => console.log('apply'),
+      },
+    })
+  );
+Banner_DeadlineExtended.storyName = 'Banner — success (deadline extended)';
+
+export const Banner_Error = () =>
+  bannerWrap(
+    createBanner({
+      variant: 'error',
+      title: 'Ders kayıt formu gönderilemedi',
+      description: 'Sunucu hatası nedeniyle isteğiniz tamamlanamadı. Lütfen birkaç dakika sonra tekrar deneyin.',
+      action: {
+        label: 'Tekrar dene',
+        onClick: () => console.log('retry'),
+      },
+    })
+  );
+Banner_Error.storyName = 'Banner — error (form submission failed)';
+
+export const Banner_NonDismissible = () =>
+  bannerWrap(
+    createBanner({
+      variant: 'warning',
+      title: 'Akademik dönem değişikliği',
+      description:
+        'Bu sayfa eski dönem verilerini gösteriyor. Güncel dönem için ana sayfaya dönün.',
+      dismissible: false,
+    })
+  );
+Banner_NonDismissible.storyName = 'Banner — non-dismissible';
+
+export const Banner_AllVariants = () => {
+  const box = document.createElement('div');
+  box.style.cssText = 'display: flex; flex-direction: column; gap: 0.75rem; max-width: 900px;';
+  box.appendChild(
+    createBanner({
+      variant: 'info',
+      title: 'Bilgi',
+      description: 'Ders ekle/bırak süresi 22 Şubat\'a kadar açık.',
+    })
+  );
+  box.appendChild(
+    createBanner({
+      variant: 'success',
+      title: 'Başarılı',
+      description: 'Tüm ders kayıtlarınız onaylandı.',
+    })
+  );
+  box.appendChild(
+    createBanner({
+      variant: 'warning',
+      title: 'Dikkat',
+      description: 'Devamsızlık limitinizi aşmak üzeresiniz (MATH 102).',
+    })
+  );
+  box.appendChild(
+    createBanner({
+      variant: 'error',
+      title: 'Hata',
+      description: 'OBS oturumunuz sona erdi. Lütfen tekrar giriş yapın.',
+    })
+  );
+  return box;
+};
+Banner_AllVariants.storyName = 'Banner — all variants';

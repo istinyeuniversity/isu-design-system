@@ -286,7 +286,7 @@ The bundle also exposes every factory on `window.ISU` for ad-hoc use:
 </script>
 ```
 
-Full list: `createDrawer`, `openDrawer`, `closeDrawer`, `createModal`, `openModal`, `closeModal`, `confirmModal`, `createAccordion`, `createTabs`, `attachTooltip`, `removeTooltip`, `createSwitch`, `createButton`, `createButtonGroup`, `createToggleGroup`, `createImageSlider`, `createDatePicker`, `createTree`, `createDescriptionList`, `createInlineEdit`, `createSplitter`, `createDataTable`, `createCard`, `createAvatar`, `createSlider`, `createRating`, `createFileUpload`, `createSearchbar`, `createCopyLink`, `createSkeleton`, `createKbd`, `createStat`, `createStatCard`, `createStepIndicator`, `createTimeline`, `createTable`, `createBreadcrumb`, `createPagination`, `createNavBar`, `createSidebar`, `createSidebarShell`, `createFooter`, `createEmptyState`, `createFab`, `createLogo`, and `init` (rescan DOM).
+Full list: `createDrawer`, `openDrawer`, `closeDrawer`, `createModal`, `openModal`, `closeModal`, `confirmModal`, `createAccordion`, `createTabs`, `attachTooltip`, `removeTooltip`, `createSwitch`, `createButton`, `createButtonGroup`, `createToggleGroup`, `createImageSlider`, `createDatePicker`, `createTree`, `createDescriptionList`, `createInlineEdit`, `createSplitter`, `createDataTable`, `createNumberInput`, `createPinInput`, `createBanner`, `createCard`, `createAvatar`, `createSlider`, `createRating`, `createFileUpload`, `createSearchbar`, `createCopyLink`, `createSkeleton`, `createKbd`, `createStat`, `createStatCard`, `createStepIndicator`, `createTimeline`, `createTable`, `createBreadcrumb`, `createPagination`, `createNavBar`, `createSidebar`, `createSidebarShell`, `createFooter`, `createEmptyState`, `createFab`, `createLogo`, and `init` (rescan DOM).
 
 ### Storybook Examples / Snippets
 
@@ -481,6 +481,16 @@ function useTheme() {
   - `.isu-date-picker-day-today`, `.isu-date-picker-day-selected`, `.isu-date-picker-day-outside`, `.isu-date-picker-day-disabled` - Day state modifiers
   - `.isu-date-picker-footer`, `.isu-date-picker-today-btn`, `.isu-date-picker-clear-btn` - Footer actions
   - Arrow keys / PageUp-Down (month) / Shift+PageUp-Down (year) / Home-End / Enter / Esc — keyboard navigation
+- `.isu-number-input` - Numeric input with `−` / `+` stepper buttons
+  - `.isu-number-input-field` - The text input in the middle
+  - `.isu-number-input-btn`, `.isu-number-input-decrement`, `.isu-number-input-increment` - Stepper buttons
+  - `.isu-number-input-sm`, `.isu-number-input-lg` - Size variants
+  - `.isu-number-input-disabled` - Disabled state
+  - Default field width is 4rem; pass `width: '12rem'` (or any CSS length / number-as-px) to the factory for wider values like tuition or balances
+  - Arrow keys (step), PageUp/Down (×10), Home/End (min/max) — keyboard nav
+- `.isu-pin-input` - N-box OTP / verification code input (auto-advance, paste-distribute, backspace-back)
+  - `.isu-pin-input-box` - Each digit cell
+  - `.isu-pin-input-sm`, `.isu-pin-input-lg` - Size variants
 - `.isu-input` - Styled input fields with focus states
 - `.isu-textarea` - Multi-line text input
 - `.isu-select` - Styled dropdown select
@@ -509,6 +519,12 @@ function useTheme() {
 - `.isu-sidebar-badge`, `.isu-sidebar-divider`, `.isu-sidebar-footer` - Sidebar utility parts
 
 ### Feedback Components
+- `.isu-banner` - Page-level alert strip (full-width). **Alert is inline (card içi), Toast is transient (kayıp), Banner is global and persistent.**
+  - `.isu-banner-info`, `.isu-banner-success`, `.isu-banner-warning`, `.isu-banner-error` - Variant colors (left-border accent)
+  - `.isu-banner-icon`, `.isu-banner-content`, `.isu-banner-title`, `.isu-banner-description` - Internal parts
+  - `.isu-banner-action`, `.isu-banner-action-btn` - Optional action button slot
+  - `.isu-banner-close` - Dismiss button (rendered when `dismissible: true`)
+  - `.isu-banner-sticky` - Stick to top of scroll container (page-level pinned)
 - `.isu-alert-success/error/warning/info` - Alert message variants
 - `.isu-badge-primary/secondary/success/warning/error` - Status badges
 - `.isu-status-badge` - Status badge with variants (in-progress, pending, hr, completed, rejected)

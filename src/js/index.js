@@ -24,6 +24,8 @@ import { createStat, createStatCard, createStatGroup } from '../components/Stat.
 import { createStepIndicator } from '../components/StepIndicator.js';
 import { createTimeline } from '../components/Timeline.js';
 import { createTable, createDataTable } from '../components/Table.js';
+import { createNumberInput, createPinInput } from '../components/Input.js';
+import { createBanner } from '../components/Feedback.js';
 import { createBreadcrumb, createPagination, createNavBar } from '../components/Navigation.js';
 import { createFooter } from '../components/Footer.js';
 import { createEmptyState } from '../components/EmptyState.js';
@@ -77,6 +79,9 @@ const ISU = {
   createTimeline,
   createTable,
   createDataTable,
+  createNumberInput,
+  createPinInput,
+  createBanner,
   createBreadcrumb,
   createPagination,
   createNavBar,
@@ -130,5 +135,8 @@ export {
   createInlineEdit,
   createSplitter,
   createDataTable,
+  createNumberInput,
+  createPinInput,
+  createBanner,
   initAuto,
 };
