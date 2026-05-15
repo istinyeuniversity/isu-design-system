@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/istinyeuniversity/isu-design-system/compare/v2.4.0...v2.5.0) (2026-05-15)
+
+
+### Features
+
+* add **DatePicker** component (`createDatePicker`) — input + popover calendar with Turkish locale by default (`DD.MM.YYYY`, Pzt-Paz, Ocak-Aralık), `min` / `max` bounds, custom `disableDates(date)` callback, manual typed entry, "Bugün" / "Temizle" footer buttons, and full keyboard navigation (Arrow keys / PageUp-Down for months / Shift+PageUp-Down for years / Home-End / Enter / Esc) using the combobox ARIA pattern
+* add **ImageSlider** component (`createImageSlider`) for image carousels in a distinct `.isu-image-slider-*` namespace (separate from the form-input `.isu-slider-*`); supports autoplay with pause on hover / focus / hidden tab, loop or bounded mode, prev/next arrows, dot indicators, keyboard navigation, and `prefers-reduced-motion`
+* add **ToggleGroup** factory (`createToggleGroup` in Button.js) — semantic segmented control with single (radiogroup) and multiple (aria-pressed) modes, vertical orientation, arrow-key navigation; visually similar to `Tabs` pills but stores a form value instead of switching panels
+* add **Tree** component (`createTree`) with full ARIA tree pattern — recursive nesting, expand/collapse with chevron toggle, selection state with roving tabindex, optional icon and badge slots, and keyboard navigation (Arrow keys / Home-End / Enter / Space); extends existing `.isu-tree-*` CSS with `.isu-tree-row`, `.isu-tree-row-selected`, `.isu-tree-icon`, `.isu-tree-badge`, `.isu-tree-toggle-empty`
+* add **DescriptionList** component (`createDescriptionList`) — semantic `<dl>` for label-value pairs (profile pages, order summaries) with horizontal and stacked layouts and sm/md/lg sizes; supports Element-valued items so badges / avatars / inline-edits can be embedded
+* add **InlineEdit** component (`createInlineEdit`) — click-to-edit text field with Enter commit / Esc cancel, optional validation callback, textarea mode (Ctrl+Enter to commit), edit-affordance icon on hover/focus, and disabled state
+* add **Splitter** component (`createSplitter`) — drag-resizable two-panel layout (horizontal or vertical) with mouse + touch + keyboard (Arrow keys, Shift+Arrow = 5%, Home/End) support, per-panel `minSize`, `defaultSize`, and `role="separator"` semantics
+* add **DataTable** factory (`createDataTable` in Table.js) alongside the existing `createTable` — sortable headers with three-state cycle (asc → desc → none), debounced global search via embedded `createSearchbar`, client-side pagination with page-size selector, single/multi row selection (checkbox + select-all with indeterminate state), sticky header, comfortable/compact density, custom `column.render(row)`, embedded empty state via `createEmptyState`, and resizable columns with Excel-like behavior (per-column width snapshot on first drag, `<colgroup>`-managed widths, table grows wider than container with horizontal scroll). Lives under `.isu-data-table-*` namespace — existing `createTable` and `.isu-table-*` are fully untouched and backward compatible
+* add **NumberInput** component (`createNumberInput`) — numeric input with `−` / `+` stepper buttons, `min` / `max` / `step` / `precision` (decimals), configurable `width`, ARIA `spinbutton` semantics, and keyboard navigation (Arrow keys step, PageUp/Down ×10, Home/End jump to bounds)
+* add **PinInput** component (`createPinInput`) — N-box OTP / verification code input with auto-advance between boxes, backspace-back, left/right arrow navigation, paste-distribute (entire pasted code spreads across the boxes), numeric or alphanumeric modes, optional masking, and `onComplete` callback fired when all boxes are filled
+* add **Banner** component (`createBanner` in Feedback.js) — page-level alert strip filling the gap between inline `Alert` and transient `Toast`; info/success/warning/error variants with left-border accent, optional action button slot, dismissible by default, and `sticky` mode for pinning to the top of scrolling content
+* add Storybook stories for every new component using İstinye Üniversitesi reference data (öğretim üyeleri, fakülteler, bölümler, ders kodları, OBS senaryoları) so consumers can see realistic dataset shapes
+* add Turkish locale strings as defaults across new components (DatePicker month / weekday / button labels, DataTable footer / empty-state / pagination labels, Banner content samples, NumberInput / PinInput aria-labels)
+* add `CLAUDE.md` documenting project rules (CSS `isu-` namespace policy, factory signature conventions, accessibility requirements, idempotent declarative-API registration, version-bump locations) and high-level architecture for future contributors
+
+
+### Improvements
+
+* visible custom scrollbars on `.isu-data-table-scroll` for both light and dark themes (12px always-visible thumb instead of macOS auto-hide; matching `scrollbar-color` for Firefox)
+* always-visible column resize handles on `.isu-data-table` headers — 2px neutral vertical bar at each cell's right edge, thicker and primary-colored on hover or during drag
+* sticky-header background applied to `.isu-data-table-sticky thead th` so body rows do not bleed through during scroll
+* `.isu-data-table` and `.isu-data-table-scroll` now flex-fill a height-constrained parent (`flex: 1 1 auto; min-height: 0`), which is required for sticky thead to engage; inert in non-flex parents so existing usage is not affected
+* expose every new factory on the global `window.ISU` object and via named exports: `createDatePicker`, `createImageSlider`, `createToggleGroup`, `createTree`, `createDescriptionList`, `createInlineEdit`, `createSplitter`, `createDataTable`, `createNumberInput`, `createPinInput`, `createBanner`
+
+
+### Fixes
+
+* **css**: a stray leading token in `src/css/isu.css` caused `dist/isu.css` to be unparseable by PostCSS — Storybook failed pre-transform with "Unknown word yap" on the first `@import`; cleaned the source so the Tailwind v4 pipeline produces valid output again
+
 ## [2.4.0](https://github.com/istinyeuniversity/isu-design-system/compare/v2.3.0...v2.4.0) (2026-04-20)
 
 

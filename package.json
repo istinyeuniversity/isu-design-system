@@ -1,6 +1,6 @@
 {
   "name": "isu-design-system",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "type": "module",
   "description": "Official design system for Istinye University - Tailwind CSS based components and styles",
   "main": "dist/isu.js",
@@ -27,8 +27,8 @@
   "scripts": {
     "tokens": "node build-tokens.js",
     "build:css": "npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --minify",
-    "build:js": "esbuild src/js/index.js --bundle --format=iife --global-name=ISU --minify --outfile=dist/isu.js --banner:js=\"/*! isu-design-system v2.4.0 | MIT */\"",
-    "build:esm": "esbuild src/js/index.js --bundle --format=esm --minify --outfile=dist/isu.esm.js --banner:js=\"/*! isu-design-system v2.4.0 | MIT */\"",
+    "build:js": "esbuild src/js/index.js --bundle --format=iife --global-name=ISU --minify --outfile=dist/isu.js --banner:js=\"/*! isu-design-system v2.5.0 | MIT */\"",
+    "build:esm": "esbuild src/js/index.js --bundle --format=esm --minify --outfile=dist/isu.esm.js --banner:js=\"/*! isu-design-system v2.5.0 | MIT */\"",
     "build": "npm run tokens && npm run build:css && npm run build:js && npm run build:esm",
     "dev": "npm run tokens && npx tailwindcss -i ./src/css/isu.css -o ./dist/isu.css --watch",
     "storybook": "storybook dev -p 6006",

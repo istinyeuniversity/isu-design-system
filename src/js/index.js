@@ -96,7 +96,7 @@ const ISU = {
   createSidebar,
   createSidebarShell,
   init: initAuto,
-  version: '2.4.0',
+  version: '2.5.0',
 };
 
 if (typeof window !== 'undefined') {
