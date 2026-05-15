@@ -286,7 +286,7 @@ The bundle also exposes every factory on `window.ISU` for ad-hoc use:
 </script>
 ```
 
-Full list: `createDrawer`, `openDrawer`, `closeDrawer`, `createModal`, `openModal`, `closeModal`, `confirmModal`, `createAccordion`, `createTabs`, `attachTooltip`, `removeTooltip`, `createSwitch`, `createButton`, `createCard`, `createAvatar`, `createSlider`, `createRating`, `createFileUpload`, `createSearchbar`, `createCopyLink`, `createSkeleton`, `createKbd`, `createStat`, `createStatCard`, `createStepIndicator`, `createTimeline`, `createTable`, `createBreadcrumb`, `createPagination`, `createNavBar`, `createSidebar`, `createSidebarShell`, `createFooter`, `createEmptyState`, `createFab`, `createLogo`, and `init` (rescan DOM).
+Full list: `createDrawer`, `openDrawer`, `closeDrawer`, `createModal`, `openModal`, `closeModal`, `confirmModal`, `createAccordion`, `createTabs`, `attachTooltip`, `removeTooltip`, `createSwitch`, `createButton`, `createButtonGroup`, `createToggleGroup`, `createImageSlider`, `createDatePicker`, `createTree`, `createDescriptionList`, `createInlineEdit`, `createSplitter`, `createDataTable`, `createCard`, `createAvatar`, `createSlider`, `createRating`, `createFileUpload`, `createSearchbar`, `createCopyLink`, `createSkeleton`, `createKbd`, `createStat`, `createStatCard`, `createStepIndicator`, `createTimeline`, `createTable`, `createBreadcrumb`, `createPagination`, `createNavBar`, `createSidebar`, `createSidebarShell`, `createFooter`, `createEmptyState`, `createFab`, `createLogo`, and `init` (rescan DOM).
 
 ### Storybook Examples / Snippets
 
@@ -472,6 +472,15 @@ function useTheme() {
 - `.isu-quote`, `.isu-quote-author` - Blockquote components
 
 ### Form Components
+- `.isu-date-picker` - Date picker input with popover calendar (combobox pattern, TR locale by default)
+  - `.isu-date-picker-input-wrap`, `.isu-date-picker-input`, `.isu-date-picker-trigger` - Input field parts
+  - `.isu-date-picker-popover` - Calendar dialog
+  - `.isu-date-picker-header`, `.isu-date-picker-month-year`, `.isu-date-picker-prev`, `.isu-date-picker-next` - Month navigation
+  - `.isu-date-picker-weekdays`, `.isu-date-picker-weekday` - Weekday header row
+  - `.isu-date-picker-grid`, `.isu-date-picker-row`, `.isu-date-picker-day` - Day grid
+  - `.isu-date-picker-day-today`, `.isu-date-picker-day-selected`, `.isu-date-picker-day-outside`, `.isu-date-picker-day-disabled` - Day state modifiers
+  - `.isu-date-picker-footer`, `.isu-date-picker-today-btn`, `.isu-date-picker-clear-btn` - Footer actions
+  - Arrow keys / PageUp-Down (month) / Shift+PageUp-Down (year) / Home-End / Enter / Esc — keyboard navigation
 - `.isu-input` - Styled input fields with focus states
 - `.isu-textarea` - Multi-line text input
 - `.isu-select` - Styled dropdown select
@@ -520,9 +529,22 @@ function useTheme() {
 - `.isu-form-step` - Form step component with active/completed states
 
 ### Data Display Components
-- `.isu-table` - Styled data table with hover effects
+- `.isu-table` - Styled data table with hover effects (simple, used by `createTable`)
   - `.isu-table thead`, `.isu-table tbody` - Table sections
   - `.isu-table th`, `.isu-table td` - Table cells
+- `.isu-data-table` - Advanced table with sort / search / pagination / selection (used by `createDataTable`). **Coexists with `.isu-table`** — existing projects using `createTable` are not affected.
+  - `.isu-data-table-toolbar` - Top bar (hosts search input)
+  - `.isu-data-table-scroll`, `.isu-data-table-table` - Scroll container + styled `<table>`
+  - `.isu-data-table-sticky` - Sticky header modifier on the table
+  - `.isu-data-table-compact` - Compact density modifier on the root
+  - `.isu-data-table-resizable` - Resizable columns modifier (applied to the `<table>`; switches to `table-layout: fixed` and enables ellipsis on cells)
+  - `.isu-data-table-th-resizable`, `.isu-data-table-resize-handle`, `.isu-data-table-resizing` - Drag handle on each resizable header + body state during active drag
+  - `.isu-data-table-sort`, `.isu-data-table-sort-asc`, `.isu-data-table-sort-desc`, `.isu-data-table-sort-icon` - Sortable header button + state
+  - `.isu-data-table-row-selected` - Selected row state
+  - `.isu-data-table-checkbox-col` - Checkbox column width
+  - `.isu-data-table-align-center`, `.isu-data-table-align-right` - Cell alignment
+  - `.isu-data-table-empty` - Empty state host (embeds `createEmptyState`)
+  - `.isu-data-table-footer`, `.isu-data-table-summary`, `.isu-data-table-page-controls`, `.isu-data-table-page-btn`, `.isu-data-table-page-size` - Pagination footer parts
 - `.isu-score-display` - Score/metric display with gradient background
   - `.isu-score-value` - Large score value
   - `.isu-score-label` - Score label
@@ -542,13 +564,44 @@ function useTheme() {
   - `.isu-file-upload-hint` - Helper text
 
 ### Organization Tree Component
-- `.isu-tree-item` - Tree item container
-- `.isu-tree-toggle` - Expand/collapse toggle button
-- `.isu-tree-toggle-expanded` - Expanded state
-- `.isu-tree-label` - Tree label
-- `.isu-tree-children` - Children container
-- `.isu-tree-children-show` - Show children state
-- `.isu-tree-child` - Child item link
+- `.isu-tree` - Tree root (`<ul role="tree">`, recursive nesting via `.isu-tree-children`)
+- `.isu-tree-item` - Tree item container (`<li role="treeitem">`)
+- `.isu-tree-row` - Clickable row containing toggle, icon, label, badge
+- `.isu-tree-row-selected` - Selected state modifier
+- `.isu-tree-toggle` - Expand/collapse chevron button
+- `.isu-tree-toggle-expanded` - Expanded state (rotates 90°)
+- `.isu-tree-toggle-empty` - Spacer for leaf nodes (keeps label alignment)
+- `.isu-tree-icon` - Optional icon slot
+- `.isu-tree-label` - Item label
+- `.isu-tree-badge` - Trailing badge (count, status)
+- `.isu-tree-children` - Children container (recursive `<ul role="group">`)
+- `.isu-tree-children-show` - Reveals children
+- Arrow keys / Home / End / Enter / Space — full ARIA tree keyboard navigation
+
+### Description List
+- `.isu-description-list` - Semantic `<dl>` for label-value pairs (profiles, order summaries, specs)
+  - `.isu-description-list-item` - Each `<dt>/<dd>` pair wrapper
+  - `.isu-description-list-label`, `.isu-description-list-value` - Label and value parts
+  - `.isu-description-list-hint` - Optional helper text under value
+  - `.isu-description-list-stacked` - Stacked layout (label above value)
+  - `.isu-description-list-sm`, `.isu-description-list-lg` - Size variants
+
+### Inline Edit
+- `.isu-inline-edit` - Click-to-edit text field
+  - `.isu-inline-edit-display` - Display mode (text + edit icon)
+  - `.isu-inline-edit-value`, `.isu-inline-edit-placeholder` - Value or placeholder text
+  - `.isu-inline-edit-icon` - Edit affordance icon (reveals on hover/focus)
+  - `.isu-inline-edit-input`, `.isu-inline-edit-textarea` - Edit mode field
+  - `.isu-inline-edit-disabled` - Disabled state
+  - Enter commits / Esc cancels / Ctrl+Enter commits in textarea
+
+### Splitter
+- `.isu-splitter` - Drag-resizable two-panel container
+  - `.isu-splitter-horizontal`, `.isu-splitter-vertical` - Orientation variants
+  - `.isu-splitter-panel` - Each panel
+  - `.isu-splitter-handle` - Drag divider (`role="separator"`)
+  - `.isu-splitter-handle-dragging` - Active drag state
+  - Arrow keys (Shift = 5%), Home/End — keyboard resize
 
 ### Overlay Components
 - `.isu-modal`, `.isu-modal-backdrop`, `.isu-modal-dialog` - Dialog overlay
@@ -622,6 +675,13 @@ function useTheme() {
 ### Additional Components
 - `.isu-icon-placeholder` - Icon placeholder component
 - `.isu-lang-btn` - Language selector button with active state
+- `.isu-image-slider` - Image carousel for rotating through slides. **Distinct from the form-input `.isu-slider-*` namespace** — `Slider` is a range input, `ImageSlider` is a carousel.
+  - `.isu-image-slider-viewport`, `.isu-image-slider-track`, `.isu-image-slider-slide` - Internal layout parts
+  - `.isu-image-slider-image`, `.isu-image-slider-caption` - Slide content
+  - `.isu-image-slider-prev`, `.isu-image-slider-next` - Navigation arrows
+  - `.isu-image-slider-indicators`, `.isu-image-slider-dot`, `.isu-image-slider-dot-active` - Dot indicators
+  - `.isu-image-slider-no-motion` - Set automatically when `prefers-reduced-motion: reduce`
+  - Arrow keys, Home, End - Keyboard navigation; autoplay pauses on hover/focus/hidden tab
 
 ### Button System
 - `.isu-button` - Base button component
@@ -629,6 +689,10 @@ function useTheme() {
 - `.isu-button-primary/secondary/ghost/outline/success/warning/error` - Color variants
 - `.isu-button-loading` - Loading state (shows inline spinner, blocks pointer events)
 - `.isu-button-group`, `.isu-button-group-vertical` - Button grouping utility
+- `.isu-toggle-group` - Segmented control (radio semantics, single/multiple modes). **Use Tabs for switching panels, ToggleGroup for storing a value.**
+  - `.isu-toggle-group-vertical` - Vertical orientation
+  - `.isu-toggle-group-item` - Each toggle button (composes with `.isu-button`)
+  - `[aria-checked="true"]` / `[aria-pressed="true"]` - Selected state (single / multiple mode)
 - `.isu-icon-button` - Icon-only button
   - `.isu-icon-button-sm/md/lg` - Size variants
   - `.isu-icon-button-primary/outline/ghost/danger` - Color variants

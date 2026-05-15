@@ -4,7 +4,13 @@ import { createModal, openModal, closeModal, confirmModal } from '../components/
 import { createTabs } from '../components/Tabs.js';
 import { attachTooltip, removeTooltip, createTooltipWrapper } from '../components/Tooltip.js';
 import { createSwitch } from '../components/Switch.js';
-import { createButton, createButtonGroup } from '../components/Button.js';
+import { createButton, createButtonGroup, createToggleGroup } from '../components/Button.js';
+import { createImageSlider } from '../components/ImageSlider.js';
+import { createDatePicker } from '../components/DatePicker.js';
+import { createTree } from '../components/Tree.js';
+import { createDescriptionList } from '../components/DescriptionList.js';
+import { createInlineEdit } from '../components/InlineEdit.js';
+import { createSplitter } from '../components/Splitter.js';
 import { createCard, createGrid, createContainer, createFlex } from '../components/Card.js';
 import { createAvatar, createAvatarGroup } from '../components/Avatar.js';
 import { createSlider } from '../components/Slider.js';
@@ -17,7 +23,7 @@ import { createKbd } from '../components/Kbd.js';
 import { createStat, createStatCard, createStatGroup } from '../components/Stat.js';
 import { createStepIndicator } from '../components/StepIndicator.js';
 import { createTimeline } from '../components/Timeline.js';
-import { createTable } from '../components/Table.js';
+import { createTable, createDataTable } from '../components/Table.js';
 import { createBreadcrumb, createPagination, createNavBar } from '../components/Navigation.js';
 import { createFooter } from '../components/Footer.js';
 import { createEmptyState } from '../components/EmptyState.js';
@@ -44,6 +50,13 @@ const ISU = {
   createSwitch,
   createButton,
   createButtonGroup,
+  createToggleGroup,
+  createImageSlider,
+  createDatePicker,
+  createTree,
+  createDescriptionList,
+  createInlineEdit,
+  createSplitter,
   createCard,
   createGrid,
   createContainer,
@@ -63,6 +76,7 @@ const ISU = {
   createStepIndicator,
   createTimeline,
   createTable,
+  createDataTable,
   createBreadcrumb,
   createPagination,
   createNavBar,
@@ -108,5 +122,13 @@ export {
   createSwitch,
   createSidebar,
   createSidebarShell,
+  createToggleGroup,
+  createImageSlider,
+  createDatePicker,
+  createTree,
+  createDescriptionList,
+  createInlineEdit,
+  createSplitter,
+  createDataTable,
   initAuto,
 };

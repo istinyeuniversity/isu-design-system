@@ -1,4 +1,4 @@
-import { createButton, createButtonGroup } from './Button.js';
+import { createButton, createButtonGroup, createToggleGroup } from './Button.js';
 
 export default {
   title: 'Components/Button',
@@ -110,3 +110,87 @@ export const ButtonGroup = () =>
     ],
   });
 ButtonGroup.storyName = 'Button Group';
+
+const ToggleGroupTemplate = (args) => createToggleGroup(args);
+
+const toggleGroupArgTypes = {
+  variant: {
+    control: { type: 'select' },
+    options: ['primary', 'secondary', 'outline', 'ghost'],
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg', 'xl'],
+  },
+  mode: {
+    control: { type: 'select' },
+    options: ['single', 'multiple'],
+  },
+  vertical: { control: 'boolean' },
+  disabled: { control: 'boolean' },
+  label: { table: { disable: true } },
+  loading: { table: { disable: true } },
+};
+
+export const ToggleGroupSingle = ToggleGroupTemplate.bind({});
+ToggleGroupSingle.storyName = 'Toggle Group — single (segmented control)';
+ToggleGroupSingle.args = {
+  ariaLabel: 'View mode',
+  mode: 'single',
+  size: 'md',
+  variant: 'outline',
+  vertical: false,
+  disabled: false,
+  value: 'grid',
+  items: [
+    { value: 'list', label: 'List' },
+    { value: 'grid', label: 'Grid' },
+    { value: 'kanban', label: 'Kanban' },
+  ],
+};
+ToggleGroupSingle.argTypes = toggleGroupArgTypes;
+ToggleGroupSingle.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use when a single value must be chosen (radio semantics). Unlike `Tabs`, this does not switch a content panel — ' +
+        'it stores a form/filter value. Keyboard: Arrow keys / Home / End.',
+    },
+  },
+};
+
+export const ToggleGroupMultiple = ToggleGroupTemplate.bind({});
+ToggleGroupMultiple.storyName = 'Toggle Group — multiple';
+ToggleGroupMultiple.args = {
+  ariaLabel: 'Text style',
+  mode: 'multiple',
+  size: 'md',
+  variant: 'outline',
+  vertical: false,
+  disabled: false,
+  values: ['bold'],
+  items: [
+    { value: 'bold', label: 'B' },
+    { value: 'italic', label: 'I' },
+    { value: 'underline', label: 'U' },
+  ],
+};
+ToggleGroupMultiple.argTypes = toggleGroupArgTypes;
+
+export const ToggleGroupVertical = ToggleGroupTemplate.bind({});
+ToggleGroupVertical.storyName = 'Toggle Group — vertical';
+ToggleGroupVertical.args = {
+  ariaLabel: 'Density',
+  mode: 'single',
+  size: 'md',
+  variant: 'outline',
+  vertical: true,
+  disabled: false,
+  value: 'comfortable',
+  items: [
+    { value: 'compact', label: 'Compact' },
+    { value: 'comfortable', label: 'Comfortable' },
+    { value: 'spacious', label: 'Spacious' },
+  ],
+};
+ToggleGroupVertical.argTypes = toggleGroupArgTypes;

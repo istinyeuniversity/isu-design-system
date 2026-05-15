@@ -7497,6 +7497,1141 @@
 
 
 /* ============================================
+   IMAGE SLIDER (carousel) — distinct from form input .isu-slider-*
+   ============================================ */
+
+@utility isu-image-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: var(--isu-neutral, #ededed);
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+}
+
+@utility isu-image-slider-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+@utility isu-image-slider-track {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  .isu-image-slider-no-motion & {
+    transition: none;
+  }
+}
+
+@utility isu-image-slider-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  position: relative;
+}
+
+@utility isu-image-slider-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+@utility isu-image-slider-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
+  color: white;
+  font-size: 0.875rem;
+}
+
+@utility isu-image-slider-prev {
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #111;
+  transition: background-color 200ms;
+  z-index: 2;
+
+  &:hover { background-color: white; }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+@utility isu-image-slider-next {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #111;
+  transition: background-color 200ms;
+  z-index: 2;
+
+  &:hover { background-color: white; }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+@utility isu-image-slider-indicators {
+  position: absolute;
+  bottom: 0.75rem;
+  inset-inline: 0;
+  display: flex;
+  gap: 0.375rem;
+  justify-content: center;
+  z-index: 2;
+}
+
+@utility isu-image-slider-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 200ms, transform 200ms;
+
+  &:hover { background-color: rgba(255, 255, 255, 0.9); }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+}
+
+@utility isu-image-slider-dot-active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+/* ============================================
+   TOGGLE GROUP (segmented control) — semantic radiogroup; visually similar to Tabs pills but stores a value
+   ============================================ */
+
+@utility isu-toggle-group {
+  display: inline-flex;
+  isolation: isolate;
+
+  & > .isu-toggle-group-item {
+    position: relative;
+  }
+
+  & > .isu-toggle-group-item:not(:first-child) {
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  & > .isu-toggle-group-item:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  & > .isu-toggle-group-item:hover,
+  & > .isu-toggle-group-item:focus-visible {
+    z-index: 1;
+  }
+
+  & > .isu-toggle-group-item[aria-pressed="true"],
+  & > .isu-toggle-group-item[aria-checked="true"] {
+    z-index: 1;
+    background-color: var(--isu-primary, #007fff);
+    color: white;
+    border-color: var(--isu-primary, #007fff);
+  }
+
+  &.isu-toggle-group-vertical {
+    flex-direction: column;
+  }
+  &.isu-toggle-group-vertical > .isu-toggle-group-item:not(:first-child) {
+    margin-left: 0;
+    margin-top: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  &.isu-toggle-group-vertical > .isu-toggle-group-item:not(:last-child) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+/* ============================================
+   DATE PICKER — input + popover calendar (combobox pattern, TR locale default)
+   ============================================ */
+
+@utility isu-date-picker {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-body);
+}
+
+@utility isu-date-picker-input-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+@utility isu-date-picker-input {
+  width: 100%;
+  min-width: 12rem;
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border: 1px solid var(--border-primary, #d4d4d4);
+  border-radius: 0.5rem;
+  background-color: var(--bg-primary, white);
+  color: var(--text-primary, #1a1a1a);
+  font-family: inherit;
+
+  &:focus {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@utility isu-date-picker-trigger {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--text-secondary, #525252);
+
+  &:hover { background-color: var(--bg-secondary, #f5f5f5); }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+@utility isu-date-picker-popover {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  min-width: 17rem;
+  padding: 0.75rem;
+  background-color: var(--bg-primary, white);
+  border: 1px solid var(--border-primary, #d4d4d4);
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-body);
+}
+
+@utility isu-date-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+@utility isu-date-picker-month-year {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-primary, #1a1a1a);
+  font-family: var(--font-heading, inherit);
+}
+
+@utility isu-date-picker-prev {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  font-size: 1.125rem;
+  line-height: 1;
+  color: var(--text-secondary, #525252);
+
+  &:hover { background-color: var(--bg-secondary, #f5f5f5); }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+}
+
+@utility isu-date-picker-next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  font-size: 1.125rem;
+  line-height: 1;
+  color: var(--text-secondary, #525252);
+
+  &:hover { background-color: var(--bg-secondary, #f5f5f5); }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+}
+
+@utility isu-date-picker-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.125rem;
+  margin-bottom: 0.25rem;
+}
+
+@utility isu-date-picker-weekday {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary, #525252);
+  padding: 0.25rem 0;
+}
+
+@utility isu-date-picker-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+@utility isu-date-picker-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.125rem;
+}
+
+@utility isu-date-picker-day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--text-primary, #1a1a1a);
+  font-family: inherit;
+
+  &:hover:not(:disabled) {
+    background-color: var(--bg-secondary, #f5f5f5);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+}
+
+@utility isu-date-picker-day-outside {
+  color: var(--text-tertiary, #a3a3a3);
+  opacity: 0.6;
+}
+
+@utility isu-date-picker-day-today {
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px var(--isu-primary, #007fff);
+}
+
+@utility isu-date-picker-day-selected {
+  background-color: var(--isu-primary, #007fff);
+  color: white;
+
+  &:hover {
+    background-color: var(--isu-primary, #007fff);
+  }
+}
+
+@utility isu-date-picker-day-disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+@utility isu-date-picker-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-primary, #d4d4d4);
+}
+
+@utility isu-date-picker-today-btn {
+  padding: 0.375rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--isu-primary, #007fff);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-family: inherit;
+
+  &:hover { background-color: rgba(0, 127, 255, 0.08); }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+}
+
+@utility isu-date-picker-clear-btn {
+  padding: 0.375rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary, #525252);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-family: inherit;
+
+  &:hover { background-color: var(--bg-secondary, #f5f5f5); }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+  }
+}
+
+[data-theme="dark"] .isu-date-picker-popover {
+  background-color: var(--bg-tertiary, #262626);
+  border-color: var(--border-primary, #404040);
+}
+[data-theme="dark"] .isu-date-picker-day:hover:not(:disabled) {
+  background-color: var(--bg-hover, #404040);
+}
+
+/* ============================================
+   TREE — hierarchical view (extends existing .isu-tree-item/.isu-tree-toggle/.isu-tree-label/.isu-tree-children)
+   ============================================ */
+
+@utility isu-tree {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-body);
+
+  & ul.isu-tree-children {
+    list-style: none;
+    padding: 0;
+  }
+}
+
+@utility isu-tree-row {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: var(--bg-secondary, #f5f5f5);
+  }
+
+  [data-theme="dark"] &:hover {
+    background-color: var(--bg-hover, #404040);
+  }
+}
+
+@utility isu-tree-row-selected {
+  background-color: rgba(0, 127, 255, 0.1);
+
+  & .isu-tree-label {
+    color: var(--isu-primary, #007fff);
+    font-weight: 600;
+  }
+
+  &:hover {
+    background-color: rgba(0, 127, 255, 0.15);
+  }
+}
+
+@utility isu-tree-icon {
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+}
+
+@utility isu-tree-toggle-empty {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+@utility isu-tree-badge {
+  margin-left: auto;
+  font-size: 0.75rem;
+  padding: 0.0625rem 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--bg-secondary, #f5f5f5);
+  color: var(--text-secondary, #525252);
+  font-weight: 500;
+
+  [data-theme="dark"] & {
+    background-color: var(--bg-hover, #404040);
+  }
+}
+
+.isu-tree-item:focus-visible {
+  outline: none;
+}
+.isu-tree-item:focus-visible > .isu-tree-row {
+  outline: 2px solid var(--isu-primary, #007fff);
+  outline-offset: 1px;
+}
+
+/* ============================================
+   DESCRIPTION LIST — semantic dl/dt/dd for label-value pairs
+   ============================================ */
+
+@utility isu-description-list {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  display: grid;
+  gap: 0;
+}
+
+@utility isu-description-list-item {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-primary, #e5e5e5);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+@utility isu-description-list-label {
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: var(--text-secondary, #525252);
+  margin: 0;
+}
+
+@utility isu-description-list-value {
+  font-size: 0.875rem;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0;
+}
+
+@utility isu-description-list-hint {
+  grid-column: 2;
+  font-size: 0.75rem;
+  color: var(--text-tertiary, #a3a3a3);
+  margin-top: 0.125rem;
+}
+
+@utility isu-description-list-stacked {
+  & > .isu-description-list-item {
+    grid-template-columns: 1fr;
+    gap: 0.125rem;
+  }
+  & > .isu-description-list-item > .isu-description-list-hint {
+    grid-column: 1;
+  }
+}
+
+@utility isu-description-list-sm {
+  & > .isu-description-list-item {
+    padding: 0.25rem 0;
+  }
+  & .isu-description-list-label,
+  & .isu-description-list-value {
+    font-size: 0.75rem;
+  }
+}
+
+@utility isu-description-list-lg {
+  & > .isu-description-list-item {
+    padding: 0.625rem 0;
+    grid-template-columns: 11rem 1fr;
+  }
+  & .isu-description-list-label,
+  & .isu-description-list-value {
+    font-size: 1rem;
+  }
+}
+
+/* ============================================
+   INLINE EDIT — click text to edit in place
+   ============================================ */
+
+@utility isu-inline-edit {
+  display: inline-block;
+  font-family: var(--font-body);
+}
+
+@utility isu-inline-edit-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+  cursor: text;
+  transition: background-color 150ms;
+  max-width: 100%;
+
+  &:hover {
+    background-color: var(--bg-secondary, #f5f5f5);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 1px;
+  }
+
+  & .isu-inline-edit-icon {
+    opacity: 0;
+    font-size: 0.75rem;
+    color: var(--text-tertiary, #a3a3a3);
+    transition: opacity 150ms;
+  }
+  &:hover .isu-inline-edit-icon,
+  &:focus-visible .isu-inline-edit-icon {
+    opacity: 1;
+  }
+
+  [data-theme="dark"] &:hover {
+    background-color: var(--bg-hover, #404040);
+  }
+}
+
+@utility isu-inline-edit-value {
+  color: var(--text-primary, #1a1a1a);
+  font-size: inherit;
+}
+
+@utility isu-inline-edit-placeholder {
+  color: var(--text-tertiary, #a3a3a3);
+  font-style: italic;
+}
+
+@utility isu-inline-edit-input {
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--isu-primary, #007fff);
+  border-radius: 0.375rem;
+  background: var(--bg-primary, white);
+  color: var(--text-primary, #1a1a1a);
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  max-width: 100%;
+
+  &[aria-invalid="true"] {
+    border-color: var(--error, #ef4444);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 127, 255, 0.2);
+  }
+}
+
+@utility isu-inline-edit-textarea {
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--isu-primary, #007fff);
+  border-radius: 0.375rem;
+  background: var(--bg-primary, white);
+  color: var(--text-primary, #1a1a1a);
+  font-family: inherit;
+  font-size: inherit;
+  resize: vertical;
+  min-height: 5rem;
+  width: 100%;
+  max-width: 100%;
+
+  &[aria-invalid="true"] {
+    border-color: var(--error, #ef4444);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 127, 255, 0.2);
+  }
+}
+
+@utility isu-inline-edit-disabled {
+  & .isu-inline-edit-display {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  & .isu-inline-edit-display:hover {
+    background-color: transparent;
+  }
+}
+
+/* ============================================
+   SPLITTER — drag-resizable panels
+   ============================================ */
+
+@utility isu-splitter {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 12rem;
+  border: 1px solid var(--border-primary, #e5e5e5);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: var(--bg-primary, white);
+
+  &.isu-splitter-horizontal {
+    flex-direction: row;
+  }
+  &.isu-splitter-vertical {
+    flex-direction: column;
+  }
+
+  &.isu-splitter-horizontal > .isu-splitter-handle {
+    cursor: col-resize;
+    flex: 0 0 0.375rem;
+    height: auto;
+  }
+  &.isu-splitter-vertical > .isu-splitter-handle {
+    cursor: row-resize;
+    flex: 0 0 0.375rem;
+    width: auto;
+  }
+}
+
+@utility isu-splitter-panel {
+  overflow: auto;
+  padding: 0.75rem;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+}
+
+@utility isu-splitter-handle {
+  position: relative;
+  background-color: var(--border-primary, #e5e5e5);
+  transition: background-color 150ms;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: var(--isu-primary, #007fff);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: -2px;
+  }
+
+  [data-theme="dark"] & {
+    background-color: var(--border-primary, #404040);
+  }
+}
+
+@utility isu-splitter-handle-dragging {
+  background-color: var(--isu-primary, #007fff);
+}
+
+/* ============================================
+   DATA TABLE — advanced table with sort / search / pagination / selection
+   Coexists with legacy .isu-table (createTable). Use .isu-data-table-* selectors
+   if you need to override; do not target .isu-table-* — that namespace is reserved
+   for the simple createTable factory used by existing projects.
+   ============================================ */
+
+@utility isu-data-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: var(--font-body);
+  width: 100%;
+  /* Fill a height-constrained flex parent (e.g. for stickyHeader to engage). Inert in non-flex parents. */
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+@utility isu-data-table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@utility isu-data-table-scroll {
+  overflow: auto;
+  border: 1px solid var(--border-primary, #e5e5e5);
+  border-radius: 0.5rem;
+  background-color: var(--bg-primary, white);
+  /* Take remaining vertical space inside .isu-data-table so overflow can scroll and sticky thead engages */
+  flex: 1 1 auto;
+  min-height: 0;
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #a3a3a3 #f0f0f0;
+
+  /* WebKit (Chrome / Safari / Edge) — force always-visible scrollbars */
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    -webkit-appearance: none;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 0 0 0.5rem 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #a3a3a3;
+    border-radius: 6px;
+    border: 2px solid #f0f0f0;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #737373;
+  }
+  &::-webkit-scrollbar-corner {
+    background: #f0f0f0;
+  }
+
+  [data-theme="dark"] & {
+    scrollbar-color: #525252 #1a1a1a;
+  }
+  [data-theme="dark"] &::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+  [data-theme="dark"] &::-webkit-scrollbar-thumb {
+    background: #525252;
+    border-color: #1a1a1a;
+  }
+  [data-theme="dark"] &::-webkit-scrollbar-thumb:hover {
+    background: #737373;
+  }
+  [data-theme="dark"] &::-webkit-scrollbar-corner {
+    background: #1a1a1a;
+  }
+}
+
+@utility isu-data-table-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: inherit;
+
+  & thead {
+    background-color: var(--bg-secondary, #f5f5f5);
+  }
+
+  & th {
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-primary, #1a1a1a);
+    font-family: var(--font-heading, inherit);
+    border-bottom: 1px solid var(--border-primary, #e5e5e5);
+    white-space: nowrap;
+  }
+
+  & td {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    color: var(--text-primary, #1a1a1a);
+    border-bottom: 1px solid var(--border-primary, #e5e5e5);
+  }
+
+  & tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  & tbody tr {
+    transition: background-color 150ms;
+  }
+
+  & tbody tr:hover {
+    background-color: var(--bg-secondary, #f5f5f5);
+  }
+
+  [data-theme="dark"] & thead {
+    background-color: var(--bg-tertiary, #262626);
+  }
+  [data-theme="dark"] & tbody tr:hover {
+    background-color: var(--bg-hover, #404040);
+  }
+}
+
+@utility isu-data-table-sticky {
+  & thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  /* Per-cell background so the sticky row is opaque (sticky + table cells need bg on the cells themselves, not just thead) */
+  & thead th {
+    background-color: var(--bg-secondary, #f5f5f5);
+  }
+  [data-theme="dark"] & thead th {
+    background-color: var(--bg-tertiary, #262626);
+  }
+}
+
+@utility isu-data-table-resizable {
+  table-layout: fixed;
+
+  & th,
+  & td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@utility isu-data-table-th-resizable {
+  position: relative;
+}
+
+@utility isu-data-table-resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0.625rem;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  z-index: 2;
+  touch-action: none;
+  user-select: none;
+
+  /* Always-visible thin vertical bar at the cell's right edge */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    right: 0;
+    width: 2px;
+    background-color: #a3a3a3;
+    border-radius: 1px;
+    transition: background-color 150ms, width 150ms;
+  }
+
+  &:hover::after {
+    background-color: var(--isu-primary, #007fff);
+    width: 3px;
+  }
+}
+
+[data-theme="dark"] .isu-data-table-resize-handle::after {
+  background-color: #737373;
+}
+
+@utility isu-data-table-resizing {
+  & .isu-data-table-resize-handle::after {
+    background-color: var(--isu-primary, #007fff);
+    width: 3px;
+  }
+  & .isu-data-table-table {
+    cursor: col-resize;
+  }
+  & * {
+    user-select: none;
+  }
+}
+
+@utility isu-data-table-compact {
+  & .isu-data-table-table th,
+  & .isu-data-table-table td {
+    padding: 0.375rem 0.625rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@utility isu-data-table-row-selected {
+  background-color: rgba(0, 127, 255, 0.06);
+
+  &:hover {
+    background-color: rgba(0, 127, 255, 0.1) !important;
+  }
+}
+
+@utility isu-data-table-checkbox-col {
+  width: 2.25rem;
+  text-align: center;
+}
+
+@utility isu-data-table-align-center {
+  text-align: center;
+}
+@utility isu-data-table-align-right {
+  text-align: right;
+}
+
+@utility isu-data-table-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+
+  &:hover {
+    color: var(--isu-primary, #007fff);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+
+@utility isu-data-table-sort-icon {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+@utility isu-data-table-sort-asc {
+  color: var(--isu-primary, #007fff);
+
+  & .isu-data-table-sort-icon { opacity: 1; }
+}
+
+@utility isu-data-table-sort-desc {
+  color: var(--isu-primary, #007fff);
+
+  & .isu-data-table-sort-icon { opacity: 1; }
+}
+
+@utility isu-data-table-empty {
+  border: 1px solid var(--border-primary, #e5e5e5);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+@utility isu-data-table-footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: var(--text-secondary, #525252);
+}
+
+@utility isu-data-table-page-size {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  & select {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--border-primary, #d4d4d4);
+    border-radius: 0.375rem;
+    background: var(--bg-primary, white);
+    color: var(--text-primary, #1a1a1a);
+    font-size: 0.8125rem;
+    font-family: inherit;
+  }
+}
+
+@utility isu-data-table-summary {
+  margin-left: auto;
+}
+
+@utility isu-data-table-page-controls {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+@utility isu-data-table-page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--border-primary, #d4d4d4);
+  background: var(--bg-primary, white);
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text-primary, #1a1a1a);
+
+  &:hover:not(:disabled) {
+    background-color: var(--bg-secondary, #f5f5f5);
+    border-color: var(--isu-primary, #007fff);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--isu-primary, #007fff);
+    outline-offset: 1px;
+  }
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+/* ============================================
    THEME TOGGLE UTILITY
    ============================================ */
 
